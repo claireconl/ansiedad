@@ -1,0 +1,7 @@
+{
+  "name": "ansiedad",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
