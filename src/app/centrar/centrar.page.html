@@ -1,13 +1,62 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>Centrar</ion-title>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/index']" class="atras">
+        <ion-icon name="chevron-back-outline" aria-setsize="large" aria-label="atras" class="atras"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Centrar</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card #card>
+    <swiper-container
+      #swiper
+      (slidechange)="swiperSlideChanged($event)"
+      [loop]="true"
+      [pagination]="true">
+      <swiper-slide>
+        <h2>¿Qu&eacute; tareas tienes que hacer hoy?</h2>
+        <ol>
+          <li>Ord&eacute;nalas de mayor a menor importancia</li>
+          <li>Divide en subtareas</li>
+        </ol>
+      </swiper-slide>
+      <swiper-slide>
+        <h2>¿D&oacute;nde te encuentras ahora mismo?</h2>
+        <ul>
+          <li>¿Hace fr&iacute;o o calor?</li>
+          <li>¿Qu&eacute; puedes ver?</li>
+          <li>¿Hay alg&uacute;n olor que te llame la atenci&oacute;n?</li>
+          <li>¿Qu&eacute; oyes?</li>
+        </ul>
+      </swiper-slide>
+      <swiper-slide>
+        <h2>C&eacute;ntrate en tu respiraci&oacute;n</h2>
+        <ol>
+          <li>Inspira durante 4 segundos</li>
+          <li>Ret&eacute;n un poco el aire</li>
+          <li>Espira lentamente hasta quedar sin aire</li>
+          <li>Repite</li>
+        </ol>
+      </swiper-slide>
+      <swiper-slide>
+        <h2>¿Qu&eacute; te preocupa?</h2>
+        <ul>
+          <li>¿Se puede solucionar?</li>
+          <li>¿Te ha pasado antes?</li>
+          <li>¿C&oacute;mo reaccionaste?</li>
+          <li>¿Depende solamente de ti?</li>
+          <li>¿Por qu&eacute; crees que te preocupa?</li>
+        </ul>
+      </swiper-slide>
+      <swiper-slide>
+        <h2>¿Qu&eacute; sientes?</h2>
+        <ul>
+          <li>¿Sientes alg&uacute;n dolor en el cuerpo?</li>
+          <li>¿Qu&eacute; emociones te vienen a la mente?</li>
+          <li>¿Te hab&iacute;as sentido antes as&iacute;?</li>
+        </ul>
+      </swiper-slide>
+    </swiper-container>
+  </ion-card>
 </ion-content>

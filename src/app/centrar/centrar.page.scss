@@ -1,0 +1,46 @@
+ion-header {
+	--ion-toolbar-background: #C8FFF2;
+}
+
+ion-card {
+    background: #FEFEEF;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    width: 90%;
+    height: 80%;
+    border: 2em;
+    border-color: #0A0048;
+    
+}
+swiper-container {
+    width: 100%;
+    height: 100%;
+    --swiper-theme-color: #0A0048;
+    color: var(--ion-text-color, #0A0048);
+}
+
+swiper-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+h2{
+    font-weight: 600;
+    margin: 1em;
+    width: 90%;
+    margin-left:2em;
+    margin-bottom: 0;
+}
+
+ul{
+    margin-top: 0;
+}
+li{
+    font-weight: 600;
+    font-size: 1.5em;
+    margin: 1.5em .5em;
+    justify-content: left;
+    width: 80%;
+}
