@@ -2,6 +2,11 @@ ion-header {
 	--ion-toolbar-background: #C8FFF2;
 }
 
+.header-ios ion-toolbar:last-of-type {
+    --border-width: 0;
+}
+
+
 ion-card {
     background: #FEFEEF;
     font-family: "Poppins", sans-serif;

@@ -1,3 +1,28 @@
 h1 {
     font-weight: 700;
+    font-size: 2.4em;
+    display: flex;
+    justify-content: center;
+}
+
+div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
+}
+ion-button{
+    width: 90%;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 1.5em;
+    --border-color: #0A0048;
+    --border-width: .15em;
+    --border-style: solid;
+    --background: #FEFEEF;
+    --color:  #0A0048;
+    margin: 1em 0;
+    height: 20%;
+    --background-activated: #FFDD67;
 }

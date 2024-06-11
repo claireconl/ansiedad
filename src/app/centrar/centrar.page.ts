@@ -19,7 +19,6 @@ export class CentrarPage implements OnInit {
   constructor() { }
 
   swiperSlideChanged(e: any){
-    console.log('changed: ', e);
   }
   ngOnInit() {
   }

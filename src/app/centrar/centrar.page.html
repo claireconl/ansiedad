@@ -7,13 +7,13 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" scroll-y="false">
   <ion-card #card>
     <swiper-container
       #swiper
       (slidechange)="swiperSlideChanged($event)"
       [loop]="true"
-      [pagination]="true">
+      [pagination]="{type:'bullets', clickable:true}">
       <swiper-slide>
         <h2>¿Qu&eacute; tareas tienes que hacer hoy?</h2>
         <ol>
