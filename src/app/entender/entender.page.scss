@@ -1,0 +1,50 @@
+ion-header {
+	--ion-toolbar-background: #C8FFF2;
+}
+
+
+ion-accordion.accordion-collapsed ion-item[slot="header"],
+ion-accordion.accordion-collapsing ion-item[slot="header"],
+ion-accordion.accordion-expanding ion-item[slot="header"],
+ion-accordion.accordion-expanded ion-item[slot="header"]{
+    --background:#FEFEEF;
+    --color: #0A0048;
+}
+
+.item.sc-ion-label-ios-h, .item .sc-ion-label-ios-h{
+    --color: #0A0048;
+    font-weight: 600;
+    font-size: 1.25em;
+    margin-right: 0;
+}
+
+.ionicon{
+    stroke:#0A0048;
+}
+p{
+    font-size: 1.1em;
+    text-align: justify;
+    margin-right: .5em;
+}
+li{
+    font-size: 1.1em;
+    text-align: justify;
+    margin-right: 0.2em;
+}
+div{
+    background-color: #FEFEEF;
+    font-weight: 600;
+}
+
+swiper-container {
+    width: 100%;
+    height: 100%;
+    --swiper-theme-color: #0A0048;
+    color: var(--ion-text-color, #0A0048);
+}
+
+swiper-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

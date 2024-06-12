@@ -1,13 +1,91 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>Entender</ion-title>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/index']" class="atras">
+        <ion-icon name="chevron-back-outline" aria-setsize="large" aria-label="atras" class="atras"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Entender</ion-title>
+      <ion-title>Entender la ansiedad</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-accordion-group expand="inset" #accordionGroup>
+    <ion-accordion value="primero">
+      <ion-item slot="header">
+        <ion-label>¿Qu&eacute; es la ansiedad?</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <p>La ansiedad es un trastorno mental caracterizado por un estado de miedo, nerviosismo y precoupación constante.</p>
+        <p>No es peligrosa, pero sus síntomas pueden ser desagradables.</p>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="segundo">
+      <ion-item slot="header">
+        <ion-label>¿Cu&aacute;les son sus s&iacute;ntomas?</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <swiper-container
+        #swiper
+        (slidechange)="swiperSlideChanged($event)"
+        [pagination]="{type:'bullets', clickable:true}">
+        <swiper-slide>
+          <p>Se distinguen varios tipos de síntomas:</p>
+          <ul>
+            <li>Miedos irracionales y pensamientos intrusivos dif&iacute;ciles de controlar.</li><br/>
+            <li>S&iacute;ntomas f&iacute;sicos como: hiperventilaci&oacute;n, taquicardia, dolor muscular, mareos, insomnio, sensaci&oacute;n de angustia, o agitaci&oacute;n entre otros. </li>
+          </ul>
+          <br/>
+        </swiper-slide>
+        <swiper-slide>
+          <p>Aunque estos s&iacute;ntomas puedan resultar desagradables y perduren en el tiempo, no son peligrosos.</p>
+          <p>Son una respuesta de nuestro cuerpo tras haberse encontrado en un estado de nerviosismo constante.</p>
+        </swiper-slide>
+        </swiper-container>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="tercero">
+      <ion-item slot="header">
+        <ion-label>¿Cu&aacute;les son sus causas?</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <swiper-container
+        #swiper
+        (slidechange)="swiperSlideChanged($event)"
+        [pagination]="{type:'bullets', clickable:true}">
+        <swiper-slide>
+          <p>La ansiedad se puede desarrollar por diversos factores: reprimir emociones, encontrarse en una mala situaci&oacute;n, una experiencia adversa como una p&eacute;rdida o abuso, o incluso una predisposici&oacute;n gen&eacute;tica.</p>
+          <br/>
+        </swiper-slide>
+        <swiper-slide>
+          <p>Es importante acudir a terapia porque all&iacute; se intentar&aacute; encontrar el origen de nuestra ansiedad y poder trabajar en ella.</p>
+        </swiper-slide>
+        </swiper-container>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="cuarto">
+      <ion-item slot="header">
+        <ion-label>¿Se puede curar?</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <p>Con una buena terapia la ansiedad se podr&aacute; curar. El tiempo var&iacute;a seg&uacute;n el paciente.</p>
+        <p>Mientras tanto, existen muchos m&eacute;todos para reducir el estr&eacute;s como el <i>mindfulness</i> o la meditaci&oacute;n, entre otros.</p>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="quinto">
+      <ion-item slot="header">
+        <ion-label>¿Qu&eacute; puedo hacer?</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <p>En momentos de ansiedad puede resultar dif&iacute;cil ver el lado positivo, pero este estado no es para siempre. </p>
+        <p>Acudir a terapia es fundamental, as&iacute; como trabajar fuera de ella para identificar aquellas situaciones que nos generan ansiedad.</p>
+        <p>Cuidar nuestros h&aacute;bitos y conocernos a nosotros mismos puede ser de mucha ayuda, as&iacute; como tener a alguien en quien apoyarse.</p>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+  
 </ion-content>
