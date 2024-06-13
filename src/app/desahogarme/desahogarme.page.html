@@ -1,13 +1,65 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>Desahogarme</ion-title>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/index']" class="atras">
+        <ion-icon name="chevron-back-outline" aria-setsize="large" aria-label="atras" class="atras"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Desahogarme</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+    <div id="iconos-calendario">
+      <ion-button id="boton-calendario" (click)="cerrarResto('calendario')">
+        <ion-icon name="calendar-outline" aria-setsize="large" class="calendario"></ion-icon>
+        <ion-label>{{ today | date: 'dd/MM' }}</ion-label>
+      </ion-button> 
+    </div>
+    <div>
+      <div class="cabecera">
+        <ion-button (click)="abrirEscribir(); cerrarResto('escribir')" class="mas">
+          <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+        </ion-button>
+        <ion-label>Escribir</ion-label>
+      </div>
+      <div id="escribir" style="display:block">
+        <ion-textarea rows="8" placeholder="¿Qu&eacute; te preocupa?"></ion-textarea>
+      </div>
+    </div>
+   <div>
+      <div class="cabecera">
+        <ion-button (click)="abrirContactos(); cerrarResto('contact')" class="mas">
+          <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+        </ion-button>
+        <ion-label>Hablar con alguien</ion-label>
+      </div>
+      <div id="contact" style="display:none">
+        <ion-accordion-group>
+          <ion-accordion id="anadir">
+            <ion-item slot="header" color="light">
+              <ion-label>A&ntilde;adir contacto</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content" id="content">
+              <div class="contacto">
+                <ion-item>
+                  <ion-input aria-label="Nombre" placeholder="Nombre"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input aria-label="Numero" placeholder="N&uacute;mero"></ion-input>
+                </ion-item>
+              </div>
+              <ion-button>Guardar</ion-button>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </div>
+    </div>
+    <div>
+      <div class="cabecera">
+        <ion-button (click)="abrirAnimo(); cerrarResto('animo')" class="mas">
+          <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+        </ion-button>
+        <ion-label>Estado de &aacute;nimo</ion-label>
+      </div>
+      <div id="animo" style="display:none">Emojis</div>
+    </div>
+  </ion-content>
