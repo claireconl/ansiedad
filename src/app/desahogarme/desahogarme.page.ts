@@ -54,6 +54,55 @@ export class DesahogarmePage implements OnInit {
       document.getElementById("contact")!.style.display='none';
       document.getElementById("animo")!.style.display='none';
     }
+  }
 
+  anadirContacto(){
+    let seccion = document.getElementById('contact');
+    let nombre = (document.getElementById('nombre')as HTMLInputElement)!.value;
+    let nuevoContacto = '';
+    if(document.getElementById('lista-contactos') == null){
+      nuevoContacto =`<div style="background-color: #FEFEEF;border-radius: 1em;border-color: #0A0048;margin: 0.5em 1.2em;border-style: solid;border-width: .16em;">
+                       <ion-accordion-group id="lista-contactos" style="display: flex;flex-direction: column; align-items: center;">
+                        <ion-accordion style="width: 90%; border-radius: 1em;">
+                          <ion-item slot="header" style="--background: #FEFEEF;">
+                            <ion-label>`+nombre+`</ion-label>
+                          </ion-item>
+                          <div class="ion-padding" slot="content" style="background-color: #FEFEEF; padding: .5em 0; display:flex;flex-direction:column;">
+                          <ion-item style="--background: #FEFEEF;">
+                            <ion-icon name="call-outline"></ion-icon>
+                            <ion-label style="margin-left: .5em">Llamar</ion-label>
+                          </ion-item>
+                          <ion-item style="--background: #FEFEEF; --inner-border-width:0">
+                            <ion-icon name="logo-whatsapp"></ion-icon>
+                            <ion-label style="margin-left: .5em">Abrir WhatsApp</ion-label>
+                          </ion-item>
+                          <ion-button style="--background:#FF8585; --color: #0A0048;font-weight: 600;width: 40%;align-self: center;">Eliminar</ion-button>
+                          </div>
+                        </ion-accordion>
+                      </ion-accordion-group>
+                      </div>`;
+      seccion!.insertAdjacentHTML("afterbegin", nuevoContacto);
+      }
+      else{
+        seccion = document.getElementById('lista-contactos');
+        nuevoContacto = `<ion-accordion style="width: 90%; border-radius: 1em;">
+                          <ion-item slot="header" style="--background: #FEFEEF;">
+                            <ion-label>`+nombre+`</ion-label>
+                          </ion-item>
+                          <div class="ion-padding" slot="content" style="background-color: #FEFEEF; padding: .5em 0; display:flex;flex-direction:column;">
+                          <ion-item style="--background: #FEFEEF;">
+                            <ion-icon name="call-outline"></ion-icon>
+                            <ion-label style="margin-left: .5em">Llamar</ion-label>
+                          </ion-item>
+                          <ion-item style="--background: #FEFEEF; --inner-border-width:0">
+                            <ion-icon name="logo-whatsapp"></ion-icon>
+                            <ion-label style="margin-left: .5em">Abrir WhatsApp</ion-label>
+                          </ion-item>
+                          <ion-button style="--background:#FF8585; --color: #0A0048;font-weight: 600;width: 40%;align-self: center;">Eliminar</ion-button>
+                          </div>
+                        </ion-accordion>`;
+      seccion!.insertAdjacentHTML("beforeend", nuevoContacto);
+    }
+    (document.getElementById('nombre')as HTMLInputElement)!.value = '';
   }
 }

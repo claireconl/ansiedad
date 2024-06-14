@@ -33,21 +33,21 @@
         <ion-label>Hablar con alguien</ion-label>
       </div>
       <div id="contact" style="display:none">
-        <ion-accordion-group>
+        <ion-accordion-group id="acordeon-anadir">
           <ion-accordion id="anadir">
-            <ion-item slot="header" color="light">
+            <ion-item slot="header" toggleIconSlot="start" id="cabecera-contacto">
               <ion-label>A&ntilde;adir contacto</ion-label>
             </ion-item>
             <div class="ion-padding" slot="content" id="content">
               <div class="contacto">
                 <ion-item>
-                  <ion-input aria-label="Nombre" placeholder="Nombre"></ion-input>
+                  <ion-input aria-label="Nombre" placeholder="Nombre" id="nombre"></ion-input>
                 </ion-item>
                 <ion-item>
-                  <ion-input aria-label="Numero" placeholder="N&uacute;mero"></ion-input>
+                  <ion-input aria-label="Numero" placeholder="N&uacute;mero" name="numero"></ion-input>
                 </ion-item>
               </div>
-              <ion-button>Guardar</ion-button>
+              <ion-button id="boton-guardar" size="small" (click)="anadirContacto()">Guardar</ion-button>
             </div>
           </ion-accordion>
         </ion-accordion-group>
