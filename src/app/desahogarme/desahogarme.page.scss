@@ -58,6 +58,9 @@ ion-textarea{
     --padding-end: .1em;
     text-align: justify;
     margin: 1em .5em;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 ion-card{
@@ -125,7 +128,7 @@ ion-accordion.accordion-expanded ion-item[slot="header"]{
     font-size: 1.3em;
 }
 
-#boton-guardar{
+.boton-guardar{
     --background: #FFDD67;
     --background-activated: #FEFEEF;
     --color: #0A0048;
@@ -135,6 +138,34 @@ ion-accordion.accordion-expanded ion-item[slot="header"]{
     margin: 1em;
     --border-radius: .5em;
     --border-style: solid;
+}
+
+//ANIMO
+
+#animo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #FEFEEF;
+    width:90%;
+    border-style: solid;
+    border-width: 0.15em;
+    border-color: #0A0048;
+    border-radius:1em;
+    color:#0A0048;
+    margin: auto;
+}
+
+h1{
+    font-size: 1.4em;
+    font-weight: 600;
+    text-align: center;
+    margin: 1em 0;
+}
+#emojis{
+    display: flex;
+    flex-direction: row;
+    margin: 1em 0.5em;
 }
 
 //BOTONES

@@ -16,6 +16,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 export class DesahogarmePage implements OnInit {
   public today: number;
   public contador: number;
+  emoticonoElegido='';
 
   constructor() {
     this.today = Date.now();
@@ -31,7 +32,7 @@ export class DesahogarmePage implements OnInit {
 
   abrirAnimo(){
     let seccion = document.getElementById("animo");
-    seccion!.style.display = 'block';
+    seccion!.style.display = 'flex';
    }
 
   abrirContactos(){
@@ -126,6 +127,65 @@ export class DesahogarmePage implements OnInit {
     (document.getElementById('nombre')as HTMLInputElement)!.value = '';
   }
 
- 
+ //ANIMO
 
+ seleccionImagen(id:string){
+  if(id=="muytriste"){
+    document.getElementById("muytriste")!.style.filter="grayscale(0%)";
+    document.getElementById("triste")!.style.filter="grayscale(100%)";
+    document.getElementById("normal")!.style.filter="grayscale(100%)";
+    document.getElementById("feliz")!.style.filter="grayscale(100%)";
+    document.getElementById("muyfeliz")!.style.filter="grayscale(100%)";
+  }
+
+  if(id=="triste"){
+    document.getElementById("muytriste")!.style.filter="grayscale(100%)";
+    document.getElementById("triste")!.style.filter="grayscale(0%)";
+    document.getElementById("normal")!.style.filter="grayscale(100%)";
+    document.getElementById("feliz")!.style.filter="grayscale(100%)";
+    document.getElementById("muyfeliz")!.style.filter="grayscale(100%)";
+  }
+
+  if(id=="normal"){
+    document.getElementById("muytriste")!.style.filter="grayscale(100%)";
+    document.getElementById("triste")!.style.filter="grayscale(100%)";
+    document.getElementById("normal")!.style.filter="grayscale(0%)";
+    document.getElementById("feliz")!.style.filter="grayscale(100%)";
+    document.getElementById("muyfeliz")!.style.filter="grayscale(100%)";
+  }
+
+  if(id=="feliz"){
+    document.getElementById("muytriste")!.style.filter="grayscale(100%)";
+    document.getElementById("triste")!.style.filter="grayscale(100%)";
+    document.getElementById("normal")!.style.filter="grayscale(100%)";
+    document.getElementById("feliz")!.style.filter="grayscale(0%)";
+    document.getElementById("muyfeliz")!.style.filter="grayscale(100%)";
+  }
+
+  if(id=="muyfeliz"){
+    document.getElementById("muytriste")!.style.filter="grayscale(100%)";
+    document.getElementById("triste")!.style.filter="grayscale(100%)";
+    document.getElementById("normal")!.style.filter="grayscale(100%)";
+    document.getElementById("feliz")!.style.filter="grayscale(100%)";
+    document.getElementById("muyfeliz")!.style.filter="grayscale(0%)";
+  }
+ }
+
+ guardarEmoji(){
+    if(document.getElementById("muytriste")!.style.filter=="grayscale(0%)"){
+      this.emoticonoElegido="muytriste";
+    }
+    else if(document.getElementById("triste")!.style.filter=="grayscale(0%)"){
+      this.emoticonoElegido="triste";
+    }
+    else if(document.getElementById("normal")!.style.filter=="grayscale(0%)"){
+      this.emoticonoElegido="normal";
+    }
+    else if(document.getElementById("feliz")!.style.filter=="grayscale(0%)"){
+      this.emoticonoElegido="feliz";
+    }
+    else{
+      this.emoticonoElegido="muyfeliz";
+    }
+ }
 }
