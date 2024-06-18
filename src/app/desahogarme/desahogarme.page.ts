@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonDatetime} from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -15,14 +15,25 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 })
 export class DesahogarmePage implements OnInit {
   public today: number;
+  public dateTime!: string;
   public contador: number;
+  public dateFormat!: string;
   emoticonoElegido='';
+  dateValue = new Date().toISOString();
+  formatedString = ''
 
   constructor() {
-    this.today = Date.now();
+    this.today = Date.now();    
     this.contador = 0;
    }
   ngOnInit() {
+    setTimeout(() => {
+      this.setToday();
+    });
+  }
+
+  setToday(){
+    this.formatedString = this.dateValue.split('T')[0]; 
   }
 
   abrirEscribir(){
@@ -40,18 +51,26 @@ export class DesahogarmePage implements OnInit {
    seccion!.style.display = 'block';
   }
 
+  abrirCalendario(){
+    let seccion = document.getElementById("calendario");
+    seccion!.style.display = 'block';
+  }
+
   cerrarResto(nombre: string){
     if(nombre==='contact'){
       document.getElementById("escribir")!.style.display='none';
       document.getElementById("animo")!.style.display='none';
+      document.getElementById("calendario")!.style.display='none';
     }
     else if(nombre==='escribir'){
       document.getElementById("contact")!.style.display='none';
       document.getElementById("animo")!.style.display='none';
+      document.getElementById("calendario")!.style.display='none';
     }
     else if(nombre==='animo'){
       document.getElementById("escribir")!.style.display='none';
       document.getElementById("contact")!.style.display='none';
+      document.getElementById("calendario")!.style.display='none';
     }
     else{
       document.getElementById("escribir")!.style.display='none';
@@ -184,8 +203,40 @@ export class DesahogarmePage implements OnInit {
     else if(document.getElementById("feliz")!.style.filter=="grayscale(0%)"){
       this.emoticonoElegido="feliz";
     }
-    else{
+    else if(document.getElementById("muyfeliz")!.style.filter=="grayscale(0%)"){
       this.emoticonoElegido="muyfeliz";
     }
+    else{
+      this.emoticonoElegido='';
+    }
+ }
+
+ //DIARIO
+ abrirDiario(value: any){
+  this.dateValue = value;
+  this.formatedString = value.split('T')[0]; 
+  let seccion = document.getElementById("nuevaSeccion");
+  let seccionNueva ='';
+  let texto = (document.getElementById("areaTexto") as HTMLTextAreaElement);
+  let imagen = document.getElementById(this.emoticonoElegido) as HTMLImageElement;
+  //CASOS
+    //no existe ningun registro
+    if(this.emoticonoElegido=='' && texto.value==''){
+      seccionNueva = `<p style="padding-left: 1em;">No hay registro para este día</p>`;
+    }
+    //existe emocion pero no texto
+    else if(this.emoticonoElegido!='' && texto.value==''){
+      seccionNueva = `<img width="60" height="60" src="`+imagen.src+`">`;
+    }
+    //existe texto pero no emocion
+    else if(this.emoticonoElegido=='' && texto.value!=''){
+      seccionNueva = `<p style="padding-left: 1em;">`+texto.value+`</p>`;
+    }
+    //existen ambos registros
+    else{
+      seccionNueva = `<img width="60" height="60" src="`+imagen.src+`">
+                      <p style="padding-left: 1em;">`+texto.value+`</p>`;
+    }
+    seccion!.innerHTML=seccionNueva
  }
 }

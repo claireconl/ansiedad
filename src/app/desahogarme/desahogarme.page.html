@@ -9,11 +9,15 @@
 </ion-header>
 <ion-content [fullscreen]="true">
     <div id="iconos-calendario">
-      <ion-button id="boton-calendario" (click)="cerrarResto('calendario')">
+      <ion-button id="boton-calendario" (click)="cerrarResto('calendario'); abrirCalendario()">
         <ion-icon name="calendar-outline" aria-setsize="large" class="calendario"></ion-icon>
         <ion-label>{{ today | date: 'dd/MM' }}</ion-label>
       </ion-button> 
     </div>
+    <div id="calendario" style="display:none">
+        <ion-datetime [value]="dateValue" (ionChange)="abrirDiario(datetime.value)" #datetime presentation="date" [firstDayOfWeek]="1" ></ion-datetime>
+        <div id="nuevaSeccion"></div>
+    </div>  
     <div>
       <div class="cabecera">
         <ion-button (click)="abrirEscribir(); cerrarResto('escribir')" class="mas">
@@ -22,7 +26,7 @@
         <ion-label>Escribir</ion-label>
       </div>
       <div id="escribir" style="display:block">
-        <ion-textarea rows="8" placeholder="¿Qu&eacute; te preocupa?"></ion-textarea>
+        <ion-textarea id="areaTexto" rows="8" placeholder="¿Qu&eacute; te preocupa?"></ion-textarea>
       </div>
     </div>
    <div>

@@ -27,6 +27,7 @@ ion-accordion{
     font-size: 0.8em;
     --background: #C8FFF2;
     --color: #0A0048;
+    --background-activated:  #FEFEEF;
     font-weight: 600;
     margin: 0;
 }
@@ -39,6 +40,17 @@ ion-label{
 #iconos-calendario{
     display: flex;
     justify-content: center;
+}
+
+#calendario{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+    border-style: solid;
+    border-color: #0A0048;
+    border-width: 0.15em;
+    background-color: #FEFEEF;
 }
 
 //ESCRIBIR
