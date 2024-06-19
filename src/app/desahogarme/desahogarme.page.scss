@@ -147,6 +147,7 @@ ion-accordion.accordion-expanded ion-item[slot="header"]{
     width: 40%;
     font-size: 1.3em;
     font-weight: 600;
+    text-transform: none;
     margin: 1em;
     --border-radius: .5em;
     --border-style: solid;
@@ -200,4 +201,6 @@ h1{
 
 ion-label{
     margin-left: .5em;
+    font-weight: 600;
+    font-size: 1.2em;
 }

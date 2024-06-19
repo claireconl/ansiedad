@@ -12,11 +12,12 @@ div{
     justify-content: center;
     height: 70%;
 }
+
 ion-button{
     width: 90%;
     font-family: "Poppins", sans-serif;
     font-weight: 600;
-    font-size: 1.5em;
+    font-size: 1.4em;
     --border-color: #0A0048;
     --border-width: .15em;
     --border-style: solid;
@@ -25,4 +26,6 @@ ion-button{
     margin: 1em 0;
     height: 20%;
     --background-activated: #FFDD67;
+    text-transform: none;
+    --border-radius: 14px;
 }

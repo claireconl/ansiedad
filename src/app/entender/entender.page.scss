@@ -9,6 +9,8 @@ ion-accordion.accordion-expanding ion-item[slot="header"],
 ion-accordion.accordion-expanded ion-item[slot="header"]{
     --background:#FEFEEF;
     --color: #0A0048;
+    font-weight: 600;
+    font-size: 1.2em;
 }
 
 .item.sc-ion-label-ios-h, .item .sc-ion-label-ios-h{
@@ -17,6 +19,7 @@ ion-accordion.accordion-expanded ion-item[slot="header"]{
     font-size: 1.25em;
     margin-right: 0;
 }
+
 
 .ionicon{
     stroke:#0A0048;
