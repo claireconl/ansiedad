@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonDatetime} from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonLabel, IonItem, IonDatetime, IonAccordionGroup, IonAccordion, IonTextarea, IonButton} from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Contacto, DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'app-desahogarme',
   templateUrl: './desahogarme.page.html',
   styleUrls: ['./desahogarme.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, RouterLink],
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonLabel, IonItem, IonDatetime, IonAccordionGroup, IonAccordion, IonTextarea, IonButton, CommonModule, FormsModule, RouterLink],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class DesahogarmePage implements OnInit {
@@ -20,9 +21,13 @@ export class DesahogarmePage implements OnInit {
   public dateFormat!: string;
   emoticonoElegido='';
   dateValue = new Date().toISOString();
-  formatedString = ''
+  formatedString = '';
+  contactos = this.database.getContactos();
+  nuevoNombreContacto = '';
+  nuevoTelfContacto = '';
+  borrarNombreContacto = '';
 
-  constructor() {
+  constructor(private database: DatabaseService) {
     this.today = Date.now();    
     this.contador = 0;
    }
@@ -34,6 +39,17 @@ export class DesahogarmePage implements OnInit {
 
   setToday(){
     this.formatedString = this.dateValue.split('T')[0]; 
+  }
+
+  async crearContacto(){
+    await this.database.anadirContacto(this.nuevoTelfContacto, this.nuevoNombreContacto);
+    this.nuevoNombreContacto='';
+    this.nuevoTelfContacto='';
+  }
+
+  async borrarContacto(){
+    this.database.eliminarContacto(this.borrarNombreContacto);
+    this.borrarNombreContacto='';
   }
 
   abrirEscribir(){
@@ -79,7 +95,7 @@ export class DesahogarmePage implements OnInit {
     }
   }
 
-  hola(nombre: string){
+  eliminarContacto(nombre: string){
     let acordeon = document.getElementById(nombre);
     acordeon!.remove();
     if(document.getElementById("lista-contactos")!.children.length==0){
@@ -89,6 +105,8 @@ export class DesahogarmePage implements OnInit {
     else{
       this.contador--;
     }
+    this.borrarNombreContacto=nombre;
+    this.borrarContacto();
   }
   anadirContacto(){
     let seccion = document.getElementById('contact');
@@ -117,7 +135,7 @@ export class DesahogarmePage implements OnInit {
                         </ion-accordion-group>
                         </div>`;
         seccion!.insertAdjacentHTML("afterbegin", nuevoContacto);
-        document.getElementsByClassName("btn-el")[0]!.addEventListener("click", () => { this.hola(nombre) });
+        document.getElementsByClassName("btn-el")[0]!.addEventListener("click", () => { this.eliminarContacto(nombre) });
         }
         else{
           seccion = document.getElementById('lista-contactos');
@@ -140,10 +158,11 @@ export class DesahogarmePage implements OnInit {
                           </ion-accordion>`;
         seccion!.insertAdjacentHTML("beforeend", nuevoContacto);
         this.contador++;
-        document.getElementsByClassName("btn-el")[this.contador]!.addEventListener("click", () => { this.hola(nombre) });
+        document.getElementsByClassName("btn-el")[this.contador]!.addEventListener("click", () => { this.eliminarContacto(nombre) });
       }
     }
     (document.getElementById('nombre')as HTMLInputElement)!.value = '';
+    this.crearContacto();
   }
 
  //ANIMO
