@@ -8,6 +8,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
+  <div id="contenido">
     <div id="iconos-calendario">
       <ion-button id="boton-calendario" (click)="cerrarResto('calendario'); abrirCalendario()">
         <ion-icon name="calendar-outline" aria-setsize="large" class="calendario"></ion-icon>
@@ -76,4 +77,5 @@
         <ion-button class="boton-guardar" size="small" (click)="guardarEmoji()">Guardar</ion-button>
       </div>
     </div>
+  </div>
   </ion-content>

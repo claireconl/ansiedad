@@ -18,7 +18,17 @@ ion-accordion{
     width: 90%;
 }
 
+#contenido{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 90%;
+}
+
 //DIARIO-CALENDARIO
+ion-datetime{
+    --background:#FEFEEF;
+}
 .calendario{
  font-size: 2em;
 }
@@ -29,7 +39,6 @@ ion-accordion{
     --color: #0A0048;
     --background-activated:  #FEFEEF;
     font-weight: 600;
-    margin: 0;
 }
 
 ion-label{
@@ -73,6 +82,9 @@ ion-textarea{
     display: block;
     margin-left: auto;
     margin-right: auto;
+    font-size:1.2em;
+
+
 }
 
 ion-card{
@@ -89,7 +101,9 @@ ion-card{
 
 ion-label{
     text-align: center;
-    margin: .5em 0;
+    margin: .5em;
+    font-size: 1.7em;
+    font-weight: 600;
 }
 
 //CONTACTOS
@@ -167,6 +181,7 @@ ion-accordion.accordion-expanded ion-item[slot="header"]{
     border-radius:1em;
     color:#0A0048;
     margin: auto;
+    margin-top: 1em;
 }
 
 h1{
@@ -197,10 +212,4 @@ h1{
 .cabecera{
     display: flex;
     align-items: center;
-}
-
-ion-label{
-    margin-left: .5em;
-    font-weight: 600;
-    font-size: 1.2em;
 }

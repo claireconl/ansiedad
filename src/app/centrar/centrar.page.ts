@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonButtons, IonIcon, IonButton } from '@ionic/angular/standalone';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterLink } from '@angular/router';
@@ -11,7 +11,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './centrar.page.html',
   styleUrls: ['./centrar.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, RouterLink, IonCard],
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, RouterLink, IonCard, IonButtons, IonIcon, IonButton],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CentrarPage implements OnInit {

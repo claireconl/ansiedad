@@ -9,7 +9,7 @@ div{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     height: 70%;
 }
 
@@ -28,4 +28,24 @@ ion-button{
     --background-activated: #FFDD67;
     text-transform: none;
     --border-radius: 14px;
+}
+
+//MEDIA QUERIES
+@media only screen and (max-width: 400px){
+    ion-button{
+        font-size:1.3em;
+        height: 15%;
+    }
+    h1{
+        margin: 1.5em .2em 0;
+    }
+}
+@media only screen and (max-width: 500px){
+    ion-button{
+        font-size:1.6em;
+        height: 15%;
+    }
+    h1{
+        margin: 1.5em .2em 0;
+    }
 }
