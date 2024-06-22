@@ -23,7 +23,6 @@ export class DesahogarmePage implements OnInit {
   dateValue = new Date().toISOString();
   formatedString = '';
   contactos = this.database.getContactos();
-  nuevoNombreContacto = '';
   formContacto: FormGroup = {} as FormGroup;
 
 
@@ -42,8 +41,7 @@ export class DesahogarmePage implements OnInit {
   }
 
   async crearContacto(){
-    await this.database.anyadirContacto(this.nuevoNombreContacto);
-    this.nuevoNombreContacto='';
+    await this.database.anyadirContacto(this.formContacto.value.nombre);
   }
 
   borrarUsuario(nombre: string){
