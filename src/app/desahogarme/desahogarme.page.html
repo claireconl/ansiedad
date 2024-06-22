@@ -37,9 +37,11 @@
         </ion-button>
         <ion-label>Hablar con alguien</ion-label>
       </div>
-      <ion-item>
-        <ion-input type="text" [(ngModel)]="nuevoNombreContacto" (ngModelChange)="crearContacto()" placeholder="Nombre"></ion-input>
-      </ion-item>
+      <form [formGroup]="formContacto" (ngSubmit)="crearContacto()">
+        <label for="name">Name:</label>
+        <input type="text" id="name" formControlName="nombre">
+        <button type="submit">Submit</button>
+      </form>
       <ion-item *ngFor="let contacto of contactos()">
         <ion-label>{{contacto.nombre}}</ion-label>
         <ion-button slot="end" (click)="borrarUsuario(contacto.nombre)" fill="clear" color="danger"></ion-button>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { Form, FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonLabel, IonItem, IonDatetime, IonAccordionGroup, IonAccordion, IonTextarea, IonButton, IonInput} from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -11,7 +11,7 @@ import { DatabaseService } from '../services/database.service';
   templateUrl: './desahogarme.page.html',
   styleUrls: ['./desahogarme.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonLabel, IonItem, IonDatetime, IonAccordionGroup, IonAccordion, IonTextarea, IonButton, IonInput, CommonModule, FormsModule, RouterLink],
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonLabel, IonItem, IonDatetime, IonAccordionGroup, IonAccordion, IonTextarea, IonButton, IonInput, CommonModule, FormsModule,ReactiveFormsModule, RouterLink],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class DesahogarmePage implements OnInit {
@@ -24,8 +24,10 @@ export class DesahogarmePage implements OnInit {
   formatedString = '';
   contactos = this.database.getContactos();
   nuevoNombreContacto = '';
+  formContacto: FormGroup = {} as FormGroup;
 
-  constructor(private database: DatabaseService) {
+
+  constructor(private database: DatabaseService, private fb: FormBuilder) {
 
     this.today = Date.now();    
     this.contador = 0;
@@ -33,6 +35,9 @@ export class DesahogarmePage implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.setToday();
+    });
+    this.formContacto = this.fb.group({
+      nombre: ['', [Validators.required]],
     });
   }
 
