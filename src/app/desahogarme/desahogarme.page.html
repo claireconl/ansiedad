@@ -44,7 +44,7 @@
       </form>
       <ion-item *ngFor="let contacto of contactos()">
         <ion-label>{{contacto.nombre}}</ion-label>
-        <ion-button slot="end" (click)="borrarUsuario(contacto.nombre)" fill="clear" color="danger"></ion-button>
+        <ion-button slot="end" (click)="borrarUsuario(contacto.nombre)" fill="clear" color="danger">Eliminar</ion-button>
       </ion-item>
       <!--<div id="contact" style="display:none">
         <ion-accordion-group id="acordeon-anadir">
