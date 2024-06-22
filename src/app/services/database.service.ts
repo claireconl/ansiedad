@@ -28,9 +28,9 @@ export class DatabaseService {
 
     await this.db.open();
 
-    const schema = `CREATE TABLE IF NOT EXISTS contactos {
+    const schema = `CREATE TABLE IF NOT EXISTS contactos(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre TEXT NOT NULL};`;
+    nombre TEXT NOT NULL);`;
 
     await this.db.execute(schema);
     this.cargarContactos();
