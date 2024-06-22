@@ -37,7 +37,14 @@
         </ion-button>
         <ion-label>Hablar con alguien</ion-label>
       </div>
-      <div id="contact" style="display:none">
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="nuevoNombreContacto" (ngModelChange)="crearContacto()" placeholder="Nombre"></ion-input>
+      </ion-item>
+      <ion-item *ngFor="let contacto of contactos()">
+        <ion-label>{{contacto.nombre}}</ion-label>
+        <ion-button slot="end" (click)="borrarUsuario(contacto.nombre)" fill="clear" color="danger"></ion-button>
+      </ion-item>
+      <!--<div id="contact" style="display:none">
         <ion-accordion-group id="acordeon-anadir">
           <ion-accordion id="anadir">
             <ion-item slot="header" toggleIconSlot="start" id="cabecera-contacto">
@@ -56,7 +63,7 @@
             </div>
           </ion-accordion>
         </ion-accordion-group>
-      </div>
+      </div>-->
     </div>
     <div>
       <div class="cabecera">

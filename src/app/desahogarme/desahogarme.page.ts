@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonLabel, IonItem, IonDatetime, IonAccordionGroup, IonAccordion, IonTextarea, IonButton, IonInput} from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { Contacto, DatabaseService } from '../services/database.service';
+import { DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'app-desahogarme',
@@ -24,10 +24,9 @@ export class DesahogarmePage implements OnInit {
   formatedString = '';
   contactos = this.database.getContactos();
   nuevoNombreContacto = '';
-  nuevoTelfContacto = '';
-  borrarNombreContacto = '';
 
   constructor(private database: DatabaseService) {
+
     this.today = Date.now();    
     this.contador = 0;
    }
@@ -37,20 +36,19 @@ export class DesahogarmePage implements OnInit {
     });
   }
 
+  async crearContacto(){
+    await this.database.anyadirContacto(this.nuevoNombreContacto);
+    this.nuevoNombreContacto='';
+  }
+
+  borrarUsuario(nombre: string){
+    this.database.borrarContacto(nombre);
+  }
+
   setToday(){
     this.formatedString = this.dateValue.split('T')[0]; 
   }
 
-  async crearContacto(){
-    await this.database.anadirContacto(this.nuevoTelfContacto, this.nuevoNombreContacto);
-    this.nuevoNombreContacto='';
-    this.nuevoTelfContacto='';
-  }
-
-  async borrarContacto(){
-    this.database.eliminarContacto(this.borrarNombreContacto);
-    this.borrarNombreContacto='';
-  }
 
   abrirEscribir(){
     let seccion = document.getElementById("escribir");
@@ -105,8 +103,6 @@ export class DesahogarmePage implements OnInit {
     else{
       this.contador--;
     }
-    this.borrarNombreContacto=nombre;
-    this.borrarContacto();
   }
   anadirContacto(){
     let seccion = document.getElementById('contact');
@@ -162,7 +158,6 @@ export class DesahogarmePage implements OnInit {
       }
     }
     (document.getElementById('nombre')as HTMLInputElement)!.value = '';
-    this.crearContacto();
   }
 
  //ANIMO
