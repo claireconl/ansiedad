@@ -10,7 +10,7 @@ export interface Contacto {
 }
 
 export interface Diario{
-  id: Date;
+  id: string;
   texto: string;
   emocion: string;
 }
@@ -21,6 +21,7 @@ export class DatabaseService {
   private sqlite: SQLiteConnection = new SQLiteConnection(CapacitorSQLite);
   private db!: SQLiteDBConnection;
   private contactos: WritableSignal<Contacto[]> = signal<Contacto[]>([]);
+  private diario: WritableSignal<Diario[]> = signal<Diario[]>([]);
 
   constructor() { }
 
@@ -38,15 +39,16 @@ export class DatabaseService {
     const schema = `CREATE TABLE IF NOT EXISTS contactos(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre TEXT NOT NULL,
-    numero VARCHAR(9) NOT NULL);
+    numero TEXT NOT NULL);
     
     CREATE TABLE IF NOT EXISTS diario(
-    id DATE PRIMARY KEY,
+    id TEXT PRIMARY KEY,
     texto TEXT,
     emocion TEXT);`;
 
     await this.db.execute(schema);
     this.cargarContactos();
+    this.cargarDiario();
     return true;
   }
 
@@ -73,5 +75,22 @@ export class DatabaseService {
 
   getContactos(){
     return this.contactos;
+  }
+
+  async crearDiario(fecha: string, texto: string, emocion: string){
+    const query = `INSERT INTO diario VALUES ('${fecha}','${texto}','${emocion}')`;
+    const result = await this.db.query(query);
+
+    this.cargarDiario();
+    return result;
+  }
+
+  async cargarDiario(){
+    const diario = await this.db.query('SELECT * from diario');
+    this.diario.set(diario.values || []);
+  }
+
+  getDiario(){
+    return this.diario;
   }
 }

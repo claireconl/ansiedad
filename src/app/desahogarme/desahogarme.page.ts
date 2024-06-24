@@ -165,30 +165,31 @@ export class DesahogarmePage implements OnInit {
  }
 
  //DIARIO
- abrirDiario(value: any){
+ async abrirDiario(value: any){
   this.dateValue = value;
   this.formatedString = value.split('T')[0]; 
   let seccion = document.getElementById("nuevaSeccion");
   let seccionNueva ='';
-  let texto = (document.getElementById("areaTexto") as HTMLTextAreaElement);
+  let texto = (document.getElementById("areaTexto") as HTMLTextAreaElement)!.value;
   let imagen = document.getElementById(this.emoticonoElegido) as HTMLImageElement;
+  await this.database.crearDiario(this.formatedString, texto, this.emoticonoElegido);
   //CASOS
     //no existe ningun registro
-    if(this.emoticonoElegido=='' && texto.value==''){
+    if(this.emoticonoElegido=='' && texto==''){
       seccionNueva = `<p style="padding-left: 1em;">No hay registro para este día</p>`;
     }
     //existe emocion pero no texto
-    else if(this.emoticonoElegido!='' && texto.value==''){
+    else if(this.emoticonoElegido!='' && texto==''){
       seccionNueva = `<img width="60" height="60" src="`+imagen.src+`">`;
     }
     //existe texto pero no emocion
-    else if(this.emoticonoElegido=='' && texto.value!=''){
-      seccionNueva = `<p style="padding-left: 1em;">`+texto.value+`</p>`;
+    else if(this.emoticonoElegido=='' && texto!=''){
+      seccionNueva = `<p style="padding-left: 1em;">`+texto+`</p>`;
     }
     //existen ambos registros
     else{
       seccionNueva = `<img width="60" height="60" src="`+imagen.src+`">
-                      <p style="padding-left: 1em;">`+texto.value+`</p>`;
+                      <p style="padding-left: 1em;">`+texto+`</p>`;
     }
     seccion!.innerHTML=seccionNueva
  }
