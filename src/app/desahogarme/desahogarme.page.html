@@ -37,38 +37,41 @@
         </ion-button>
         <ion-label>Hablar con alguien</ion-label>
       </div>
-      <form [formGroup]="formContacto" (ngSubmit)="crearContacto()">
-        <label for="name" hidden>Name:</label>
-        <ion-input type="text" id="name" formControlName="nombre"></ion-input>
-        <label for="numero" hidden>Numero:</label>
-        <ion-input type="tel" id="numero" formControlName="numero"></ion-input>
-        <ion-button type="submit">Submit</ion-button>
-      </form>
-      <ion-item *ngFor="let contacto of contactos()">
-        <ion-label>{{contacto.nombre}}</ion-label>
-        <ion-label>{{contacto.numero}}</ion-label>
-        <ion-button slot="end" (click)="borrarUsuario(contacto)" fill="clear" color="danger">Eliminar</ion-button>
-      </ion-item>
-      <!--<div id="contact" style="display:none">
+      <div id="contact" style="display:none">
         <ion-accordion-group id="acordeon-anadir">
           <ion-accordion id="anadir">
             <ion-item slot="header" toggleIconSlot="start" id="cabecera-contacto">
               <ion-label>A&ntilde;adir contacto</ion-label>
             </ion-item>
-            <div class="ion-padding" slot="content" id="content">
-              <div class="contacto">
-                <ion-item>
-                  <ion-input aria-label="Nombre" placeholder="Nombre" id="nombre"></ion-input>
-                </ion-item>
-                <ion-item>
-                  <ion-input aria-label="Numero" placeholder="N&uacute;mero" name="numero"></ion-input>
-                </ion-item>
-              </div>
-              <ion-button class="boton-guardar" size="small" (click)="anadirContacto()">Guardar</ion-button>
+              <div class="ion-padding" slot="content" id="content">
+                <form [formGroup]="formContacto" (ngSubmit)="crearContacto()">
+                  <div class="contacto">
+                    <ion-item>
+                      <ion-input type="text" formControlName="nombre" aria-label="Nombre" placeholder="Nombre" id="nombre"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-input type="tel" formControlName="numero" aria-label="Numero" placeholder="N&uacute;mero" name="numero"></ion-input>
+                    </ion-item>
+                  </div>
+                  <ion-button type="submit" class="boton-guardar" size="small">Guardar</ion-button>
+                </form>
             </div>
           </ion-accordion>
         </ion-accordion-group>
-      </div>-->
+      </div>
+      <!--<form [formGroup]="formContacto" (ngSubmit)="crearContacto()">
+        <label for="name" hidden>Name:</label>
+        <ion-input type="text" id="name" formControlName="nombre"></ion-input>
+        <label for="numero" hidden>Numero:</label>
+        <ion-input type="tel" id="numero" formControlName="numero"></ion-input>
+        <ion-button type="submit">Submit</ion-button>
+      </form>-->
+      <ion-item *ngFor="let contacto of contactos()">
+        <ion-label>{{contacto.nombre}}</ion-label>
+        <ion-label>{{contacto.numero}}</ion-label>
+        <ion-button slot="end" (click)="borrarUsuario(contacto)" fill="clear" color="danger">Eliminar</ion-button>
+      </ion-item>
+      
     </div>
     <div>
       <div class="cabecera">
