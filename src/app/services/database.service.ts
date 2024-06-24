@@ -6,6 +6,7 @@ const DB_ANSIEDAD = 'myansiedaddb';
 export interface Contacto {
   id: number;
   nombre: string;
+  numero: string;
 }
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,8 @@ export class DatabaseService {
 
     const schema = `CREATE TABLE IF NOT EXISTS contactos(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre TEXT NOT NULL);`;
+    nombre TEXT NOT NULL,
+    numero TEXT NOT NULL);`;
 
     await this.db.execute(schema);
     this.cargarContactos();
@@ -38,8 +40,8 @@ export class DatabaseService {
   }
 
   //CRUD
-  async anyadirContacto(nombre: string){
-    const query = `INSERT INTO contactos (nombre) VALUES ('${nombre}')`;
+  async anyadirContacto(nombre: string, numero:string){
+    const query = `INSERT INTO contactos (nombre, numero) VALUES ('${nombre}, ${numero}')`;
     const result = await this.db.query(query);
 
     this.cargarContactos();

@@ -37,11 +37,12 @@ export class DesahogarmePage implements OnInit {
     });
     this.formContacto = this.fb.group({
       nombre: ['', [Validators.required]],
+      numero: ['', [Validators.required]],
     });
   }
 
   async crearContacto(){
-    await this.database.anyadirContacto(this.formContacto.value.nombre);
+    await this.database.anyadirContacto(this.formContacto.value.nombre, this.formContacto.value.numero);
   }
 
   borrarUsuario(nombre: string){

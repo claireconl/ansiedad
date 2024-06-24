@@ -38,12 +38,15 @@
         <ion-label>Hablar con alguien</ion-label>
       </div>
       <form [formGroup]="formContacto" (ngSubmit)="crearContacto()">
-        <label for="name">Name:</label>
+        <label for="name" hidden>Name:</label>
         <input type="text" id="name" formControlName="nombre">
+        <label for="numero" hidden>Numero:</label>
+        <input type="tel" id="numero" formControlName="numero">
         <button type="submit">Submit</button>
       </form>
       <ion-item *ngFor="let contacto of contactos()">
         <ion-label>{{contacto.nombre}}</ion-label>
+        <ion-label>{{contacto.numero}}</ion-label>
         <ion-button slot="end" (click)="borrarUsuario(contacto.nombre)" fill="clear" color="danger">Eliminar</ion-button>
       </ion-item>
       <!--<div id="contact" style="display:none">
