@@ -77,7 +77,7 @@ export class DatabaseService {
     return this.contactos;
   }
 
-  async crearDiario(fecha: string, texto: string, emocion: string){
+  async crearDiario(fecha: string, texto: any, emocion: any){
     const query = `INSERT INTO diario VALUES ('${fecha}','${texto}','${emocion}')`;
     const result = await this.db.query(query);
 

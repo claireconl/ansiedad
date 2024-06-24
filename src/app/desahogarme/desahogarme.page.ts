@@ -30,6 +30,7 @@ export class DesahogarmePage implements OnInit {
 
     this.today = Date.now();    
     this.contador = 0;
+    
    }
   ngOnInit() {
     setTimeout(() => {
@@ -39,6 +40,12 @@ export class DesahogarmePage implements OnInit {
       nombre: ['', [Validators.required]],
       numero: ['', [Validators.required]],
     });
+    this.crearRegistroDiario();
+  }
+
+  async crearRegistroDiario(){
+    this.formatedString = this.dateValue.split('T')[0];
+    await this.database.crearDiario(this.formatedString, null, null);
   }
 
   async crearContacto(){
