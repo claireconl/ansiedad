@@ -150,7 +150,7 @@ export class DesahogarmePage implements OnInit {
   }
  }
 
- guardarEmoji(){
+ async guardarEmoji(){
     if(document.getElementById("muytriste")!.style.filter=="grayscale(0%)"){
       this.emoticonoElegido="muytriste";
     }
@@ -169,6 +169,8 @@ export class DesahogarmePage implements OnInit {
     else{
       this.emoticonoElegido='';
     }
+    this.formatedString = this.dateValue.split('T')[0]; 
+    await this.database.guardarEmocion(this.formatedString, this.emoticonoElegido);
  }
 
  //DIARIO

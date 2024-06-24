@@ -85,6 +85,22 @@ export class DatabaseService {
     return result;
   }
 
+  async guardarEmocion(fecha:string, emocion: string){
+    const query = `UPDATE diario SET emocion=${emocion} WHERE fecha=${fecha}`;
+    const result = await this.db.query(query);
+
+    this.cargarDiario();
+    return result;
+  }
+
+  async guardarTexto(fecha:string, texto: string){
+    const query = `UPDATE diario SET texto=${texto} WHERE fecha=${fecha}`;
+    const result = await this.db.query(query);
+
+    this.cargarDiario();
+    return result;
+  }
+
   async cargarDiario(){
     const diario = await this.db.query('SELECT * from diario');
     this.diario.set(diario.values || []);
