@@ -39,10 +39,10 @@
       </div>
       <form [formGroup]="formContacto" (ngSubmit)="crearContacto()">
         <label for="name" hidden>Name:</label>
-        <input type="text" id="name" formControlName="nombre">
+        <ion-input type="text" id="name" formControlName="nombre"></ion-input>
         <label for="numero" hidden>Numero:</label>
-        <input type="tel" id="numero" formControlName="numero">
-        <button type="submit">Submit</button>
+        <ion-input type="tel" id="numero" formControlName="numero"></ion-input>
+        <ion-button type="submit">Submit</ion-button>
       </form>
       <ion-item *ngFor="let contacto of contactos()">
         <ion-label>{{contacto.nombre}}</ion-label>
