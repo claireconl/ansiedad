@@ -32,7 +32,7 @@ export class DatabaseService {
     const schema = `CREATE TABLE IF NOT EXISTS contactos(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre TEXT NOT NULL,
-    numero TEXT NOT NULL);`;
+    numero VARCHAR(9) NOT NULL);`;
 
     await this.db.execute(schema);
     this.cargarContactos();
@@ -41,7 +41,7 @@ export class DatabaseService {
 
   //CRUD
   async anyadirContacto(nombre: string, numero:string){
-    const query = `INSERT INTO contactos (nombre, numero) VALUES ('${nombre}, ${numero}')`;
+    const query = `INSERT INTO contactos (nombre, numero) VALUES ('${nombre}','${numero}')`;
     const result = await this.db.query(query);
 
     this.cargarContactos();
