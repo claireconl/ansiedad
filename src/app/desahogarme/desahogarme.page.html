@@ -60,11 +60,12 @@
         </ion-accordion-group>
         <div id="div-contactos" style="background-color: #FEFEEF;border-radius: 1em;border-color: #0A0048;margin: 0.5em 1.2em;border-style: solid;border-width: .16em;">
           <ion-accordion-group id="lista-contactos" style="display: flex;flex-direction: column; align-items: center;">
-            <ion-accordion style="width: 90%; border-radius: 1em;">
-              <ion-item *ngFor="let contacto of contactos()" slot="header" style="--background: #FEFEEF;">
+            <ion-accordion *ngFor="let contacto of contactos()" style="width: 90%; border-radius: 1em;">
+              <ion-item slot="header" style="--background: #FEFEEF;">
                 <ion-label>{{contacto.nombre}}</ion-label>
                 <ion-label>{{contacto.numero}}</ion-label>
-                <div class="ion-padding" slot="content" style="background-color: #FEFEEF; padding: .5em 0; display:flex;flex-direction:column;">
+              </ion-item>
+              <div class="ion-padding" slot="content" style="background-color: #FEFEEF; padding: .5em 0; display:flex;flex-direction:column;">
                 <ion-item style="--background: #FEFEEF;">
                   <ion-icon name="call-outline"></ion-icon>
                   <ion-label style="margin-left: .5em">Llamar</ion-label>
@@ -75,9 +76,8 @@
                 </ion-item>
                 <ion-button (click)="borrarUsuario(contacto)" fill="clear" style="--background:#FF8585; --color:#0A0048;font-weight: 600;width: 40%;align-self: center;">Eliminar</ion-button>
               </div>
-            </ion-item>
-            </ion-accordion>
-          </ion-accordion-group>
+          </ion-accordion>
+        </ion-accordion-group>
           </div>
         </div>
       <!--<ion-item *ngFor="let contacto of contactos()">
