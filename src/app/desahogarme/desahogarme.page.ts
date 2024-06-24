@@ -44,7 +44,7 @@ export class DesahogarmePage implements OnInit {
   async crearContacto(){
     await this.database.anyadirContacto(this.formContacto.value.nombre, this.formContacto.value.numero);
     (document.getElementById('nombre')as HTMLInputElement)!.value = '';
-    (document.getElementById('nombre')as HTMLInputElement)!.value = '';
+    (document.getElementById('numero')as HTMLInputElement)!.value = '';
   }
 
   borrarUsuario(contacto: Contacto){
