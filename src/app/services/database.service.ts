@@ -8,6 +8,12 @@ export interface Contacto {
   nombre: string;
   numero: string;
 }
+
+export interface Diario{
+  id: Date;
+  texto: string;
+  emocion: string;
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -32,7 +38,12 @@ export class DatabaseService {
     const schema = `CREATE TABLE IF NOT EXISTS contactos(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre TEXT NOT NULL,
-    numero VARCHAR(9) NOT NULL);`;
+    numero VARCHAR(9) NOT NULL);
+    
+    CREATE TABLE IF NOT EXISTS diario(
+    id DATE PRIMARY KEY,
+    texto TEXT,
+    emocion TEXT);`;
 
     await this.db.execute(schema);
     this.cargarContactos();
