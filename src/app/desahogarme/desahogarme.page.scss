@@ -107,6 +107,11 @@ ion-label{
 }
 
 //CONTACTOS
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 ion-accordion{
     background-color: #FEFEEF;
     display: flex;
