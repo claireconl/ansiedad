@@ -42,12 +42,12 @@
           <ion-accordion-group id="lista-contactos">
             <ion-accordion *ngFor="let contacto of contactos()" style="width: 90%; border-radius: 1em; border-style:solid; border-color: #0A0048; border-width: 0.15em;">
               <ion-item slot="header">
-                <ion-label>{{contacto.nombre}}</ion-label>
+                <ion-label style="font-size: 1.4em;">{{contacto.nombre}}</ion-label>
               </ion-item>
               <div class="ion-padding" slot="content">
                 <ion-item style="--background: #FEFEEF; border-style: none;">
                   <ion-icon name="call-outline"></ion-icon>
-                  <ion-label style="margin-left: .5em; font-size:1.4em">Llamar</ion-label>
+                  <ion-label style="margin-left: .5em;">Llamar</ion-label>
                 </ion-item>
                 <ion-item style="--background: #FEFEEF; --inner-border-width:0; border-style: none;">
                   <ion-icon name="logo-whatsapp"></ion-icon>
