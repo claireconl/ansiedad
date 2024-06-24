@@ -48,8 +48,8 @@ export class DatabaseService {
     return result;
   }
 
-  async borrarContacto(nombre:string){
-    const query = `DELETE FROM contactos WHERE nombre=${nombre}`;
+  async borrarContacto(id:string){
+    const query = `DELETE FROM contactos WHERE id=${id}`;
     const result = await this.db.query(query);
 
     this.cargarContactos();

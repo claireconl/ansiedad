@@ -4,7 +4,7 @@ import { Form, FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsMod
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonLabel, IonItem, IonDatetime, IonAccordionGroup, IonAccordion, IonTextarea, IonButton, IonInput} from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { DatabaseService } from '../services/database.service';
+import { Contacto, DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'app-desahogarme',
@@ -45,8 +45,8 @@ export class DesahogarmePage implements OnInit {
     await this.database.anyadirContacto(this.formContacto.value.nombre, this.formContacto.value.numero);
   }
 
-  borrarUsuario(nombre: string){
-    this.database.borrarContacto(nombre);
+  borrarUsuario(contacto: Contacto){
+    this.database.borrarContacto(contacto.id.toString());
   }
 
   setToday(){
