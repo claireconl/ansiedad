@@ -40,20 +40,20 @@
       <div id="contact" style="display:none">
         <div id="div-contactos">
           <ion-accordion-group id="lista-contactos">
-            <ion-accordion *ngFor="let contacto of contactos()" style="width: 90%; border-radius: 1em;">
+            <ion-accordion *ngFor="let contacto of contactos()" style="width: 90%; border-radius: 1em; border-style:solid; border-color: #0A0048; border-width: 0.15em;">
               <ion-item slot="header">
                 <ion-label>{{contacto.nombre}}</ion-label>
               </ion-item>
               <div class="ion-padding" slot="content">
                 <ion-item style="--background: #FEFEEF; border-style: none;">
                   <ion-icon name="call-outline"></ion-icon>
-                  <ion-label style="margin-left: .5em">Llamar</ion-label>
+                  <ion-label style="margin-left: .5em; font-size:1.4em">Llamar</ion-label>
                 </ion-item>
-                <ion-item style="--background: #FEFEEF; --inner-border-width:0  border-style: none;">
+                <ion-item style="--background: #FEFEEF; --inner-border-width:0; border-style: none;">
                   <ion-icon name="logo-whatsapp"></ion-icon>
                   <ion-label style="margin-left: .5em">Abrir WhatsApp</ion-label>
                 </ion-item>
-                <ion-button (click)="borrarUsuario(contacto)" fill="clear" style="--background:#FF8585; --color:#0A0048;font-weight: 600;width: 40%;align-self: center;">Eliminar</ion-button>
+                <ion-button (click)="borrarUsuario(contacto)" fill="clear" style="--background:#FF8585; --color:#0A0048;font-weight: 600;width: 40%;align-self: center; text-transform: none;">Eliminar</ion-button>
               </div>
             </ion-accordion>
           </ion-accordion-group>
@@ -70,7 +70,7 @@
                       <ion-input type="text" formControlName="nombre" aria-label="Nombre" autocapitalize="true" placeholder="Nombre" id="nombre"></ion-input>
                     </ion-item>
                     <ion-item>
-                      <ion-input type="tel" formControlName="numero" aria-label="Numero" placeholder="N&uacute;mero" name="numero"></ion-input>
+                      <ion-input type="tel" formControlName="numero" aria-label="Numero" placeholder="N&uacute;mero" name="numero" id="numero"></ion-input>
                     </ion-item>
                   </div>
                   <ion-button type="submit" class="boton-guardar" size="small">Guardar</ion-button>
