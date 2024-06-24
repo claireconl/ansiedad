@@ -20,6 +20,7 @@ export class DesahogarmePage implements OnInit {
   public contador: number;
   public dateFormat!: string;
   emoticonoElegido='';
+  textoEscrito='';
   dateValue = new Date().toISOString();
   formatedString = '';
   contactos = this.database.getContactos();
@@ -171,6 +172,12 @@ export class DesahogarmePage implements OnInit {
     }
     this.formatedString = this.dateValue.split('T')[0]; 
     await this.database.guardarEmocion(this.formatedString, this.emoticonoElegido);
+ }
+
+ async guardarTexto(){
+  this.textoEscrito = (document.getElementById("areaTexto") as HTMLTextAreaElement)!.value;
+  this.formatedString = this.dateValue.split('T')[0]; 
+  await this.database.guardarTexto(this.formatedString, this.textoEscrito);
  }
 
  //DIARIO

@@ -27,7 +27,7 @@
         <ion-label>Escribir</ion-label>
       </div>
       <div id="escribir" style="display:block">
-        <ion-textarea id="areaTexto" rows="8" placeholder="¿Qu&eacute; te preocupa?"></ion-textarea>
+        <ion-textarea (ionChange)="guardarTexto()" id="areaTexto" rows="8" placeholder="¿Qu&eacute; te preocupa?"></ion-textarea>
       </div>
     </div>
    <div>
