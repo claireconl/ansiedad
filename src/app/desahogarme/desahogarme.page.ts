@@ -42,8 +42,18 @@ export class DesahogarmePage implements OnInit {
       nombre: ['', [Validators.required]],
       numero: ['', [Validators.required]],
     });
+    this.crearRegistroDiario();
   }
 
+  async crearRegistroDiario(){
+    this.formatedString = this.dateValue.split('T')[0];
+    await this.database.crearDiario(this.formatedString, this.textoEscrito, this.emoticonoElegido);
+  }
+
+  guardarTexto(){
+    this.textoEscrito = (document.getElementById("areaTexto") as HTMLTextAreaElement)!.value;
+    this.database.guardarTexto(this.formatedString, this.textoEscrito);
+  }
   async crearContacto(){
     await this.database.anyadirContacto(this.formContacto.value.nombre, this.formContacto.value.numero);
     (document.getElementById('nombre')as HTMLInputElement)!.value = '';
@@ -175,9 +185,6 @@ export class DesahogarmePage implements OnInit {
   let seccionNueva ='';
   let texto = (document.getElementById("areaTexto") as HTMLTextAreaElement)!.value;
   let imagen = document.getElementById(this.emoticonoElegido) as HTMLImageElement;
-  console.log("fecha: "+this.formatedString);
-  console.log("texto: "+texto);
-  console.log("emoji: "+this.emoticonoElegido);
   this.database.crearDiario(this.formatedString, texto, this.emoticonoElegido);
   //CASOS
     //no existe ningun registro
