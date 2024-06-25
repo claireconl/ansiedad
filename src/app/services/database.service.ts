@@ -85,16 +85,16 @@ export class DatabaseService {
     return result;
   }
 
-  async guardarEmocion(id: string, emocion: string){
-    const query = `UPDATE diario SET emocion=${emocion} WHERE id=${id}`;
+  async guardarEmocion(fecha: string, emocion: string){
+    const query = `UPDATE diario SET emocion='${emocion}' WHERE id='${fecha}'`;
     const result = await this.db.query(query);
 
     this.cargarDiario();
     return result;
   }
 
-  async guardarTexto(text: string){
-    const query = `UPDATE diario SET texto='${text}'`;
+  async guardarTexto(fecha: string, text: string,){
+    const query = `UPDATE diario SET texto='${text}' WHERE id='${fecha}'`;
     const result = await this.db.query(query);
 
     this.cargarDiario();
