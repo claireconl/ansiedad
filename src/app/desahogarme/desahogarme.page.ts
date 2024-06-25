@@ -52,7 +52,7 @@ export class DesahogarmePage implements OnInit {
 
   guardarTexto(){
     this.textoEscrito = (document.getElementById("areaTexto") as HTMLTextAreaElement)!.value;
-    this.database.guardarTexto(this.formatedString, this.textoEscrito);
+    this.database.guardarTexto(this.textoEscrito);
   }
   async crearContacto(){
     await this.database.anyadirContacto(this.formContacto.value.nombre, this.formContacto.value.numero);
