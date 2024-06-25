@@ -43,6 +43,7 @@ export class DesahogarmePage implements OnInit {
       numero: ['', [Validators.required]],
     });
     this.crearRegistroDiario();
+    this.mostrarTexto();
   }
 
   async crearRegistroDiario(){
@@ -54,6 +55,15 @@ export class DesahogarmePage implements OnInit {
     this.textoEscrito = (document.getElementById("areaTexto") as HTMLTextAreaElement)!.value;
     this.database.guardarTexto(this.formatedString,this.textoEscrito.toString());
   }
+
+  mostrarTexto(){
+    for(let item of this.diarios()){
+      if(item.id==this.formatedString){
+        (document.getElementById("areaTexto") as HTMLTextAreaElement)!.value=item.texto;
+      }
+    }
+  }
+
   async crearContacto(){
     await this.database.anyadirContacto(this.formContacto.value.nombre, this.formContacto.value.numero);
     (document.getElementById('nombre')as HTMLInputElement)!.value = '';
