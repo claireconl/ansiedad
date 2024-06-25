@@ -24,6 +24,7 @@ export class DesahogarmePage implements OnInit {
   dateValue = new Date().toISOString();
   formatedString = '';
   contactos = this.database.getContactos();
+  diarios = this.database.getDiario();
   formContacto: FormGroup = {} as FormGroup;
 
 
@@ -171,7 +172,7 @@ export class DesahogarmePage implements OnInit {
       this.emoticonoElegido='';
     }
     this.formatedString = this.dateValue.split('T')[0]; 
-    this.database.guardarEmocion(this.formatedString, this.emoticonoElegido);
+    this.database.guardarEmocion(this.emoticonoElegido);
  }
 
  guardarTexto(){

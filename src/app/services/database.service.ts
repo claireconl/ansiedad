@@ -85,8 +85,8 @@ export class DatabaseService {
     return result;
   }
 
-  async guardarEmocion(fecha:string, emocion: any){
-    const query = `UPDATE diario SET emocion=${emocion} WHERE id=${fecha}`;
+  async guardarEmocion(emocion: string){
+    const query = `UPDATE diario SET emocion=${emocion} WHERE id="2024-06-25"}`;
     const result = await this.db.query(query);
 
     this.cargarDiario();
