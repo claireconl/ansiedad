@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton } from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Optional } from '@angular/core';
+import { IonRouterOutlet, Platform } from '@ionic/angular/standalone';
+import { App } from '@capacitor/app';
 
 @Component({
   selector: 'app-index',
@@ -15,9 +18,17 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 })
 export class IndexPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private platform: Platform,
+    @Optional() private routerOutlet?: IonRouterOutlet
+  ) {
+    this.platform.backButton.subscribeWithPriority(-1, () => {
+      if (!this.routerOutlet!.canGoBack()) {
+        App.exitApp();
+      }
+    });
+  }
 
   ngOnInit() {
   }
-
 }
