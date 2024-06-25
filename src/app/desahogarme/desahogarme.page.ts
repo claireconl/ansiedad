@@ -151,7 +151,7 @@ export class DesahogarmePage implements OnInit {
   }
  }
 
- async guardarEmoji(){
+ guardarEmoji(){
     if(document.getElementById("muytriste")!.style.filter=="grayscale(0%)"){
       this.emoticonoElegido="muytriste";
     }
@@ -171,24 +171,24 @@ export class DesahogarmePage implements OnInit {
       this.emoticonoElegido='';
     }
     this.formatedString = this.dateValue.split('T')[0]; 
-    await this.database.guardarEmocion(this.formatedString, this.emoticonoElegido);
+    this.database.guardarEmocion(this.formatedString, this.emoticonoElegido);
  }
 
- async guardarTexto(){
+ guardarTexto(){
   this.textoEscrito = (document.getElementById("areaTexto") as HTMLTextAreaElement)!.value;
   this.formatedString = this.dateValue.split('T')[0]; 
-  await this.database.guardarTexto(this.formatedString, this.textoEscrito);
+  this.database.guardarTexto(this.formatedString, this.textoEscrito);
  }
 
  //DIARIO
- async abrirDiario(value: any){
+ abrirDiario(value: any){
   this.dateValue = value;
   this.formatedString = value.split('T')[0]; 
   let seccion = document.getElementById("nuevaSeccion");
   let seccionNueva ='';
   let texto = (document.getElementById("areaTexto") as HTMLTextAreaElement)!.value;
   let imagen = document.getElementById(this.emoticonoElegido) as HTMLImageElement;
-  await this.database.crearDiario(this.formatedString, texto, this.emoticonoElegido);
+  this.database.crearDiario(this.formatedString, texto, this.emoticonoElegido);
   //CASOS
     //no existe ningun registro
     if(this.emoticonoElegido=='' && texto==''){
