@@ -92,22 +92,42 @@ export class DesahogarmePage implements OnInit {
 
   abrirEscribir(){
     let seccion = document.getElementById("escribir");
-    seccion!.style.display = 'block';
+    if(seccion!.style.display == 'block'){
+      seccion!.style.display='none';
+    }
+    else{
+      seccion!.style.display='block';
+    }
   }
 
   abrirAnimo(){
     let seccion = document.getElementById("animo");
-    seccion!.style.display = 'flex';
+    if(seccion!.style.display == 'flex'){
+      seccion!.style.display='none';
+    }
+    else{
+      seccion!.style.display='flex';
+    }
    }
 
   abrirContactos(){
    let seccion = document.getElementById("contact");
-   seccion!.style.display = 'block';
+   if(seccion!.style.display == 'block'){
+      seccion!.style.display='none';
+    }
+    else{
+      seccion!.style.display='block';
+    }
   }
 
   abrirCalendario(){
     let seccion = document.getElementById("calendario");
-    seccion!.style.display = 'block';
+    if(seccion!.style.display == 'block'){
+      seccion!.style.display='none';
+    }
+    else{
+      seccion!.style.display='block';
+    }
   }
 
   cerrarResto(nombre: string){
