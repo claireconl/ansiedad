@@ -44,6 +44,7 @@ export class DesahogarmePage implements OnInit {
     });
     this.crearRegistroDiario();
     this.mostrarTexto();
+    this.mostrarEmoji();
   }
 
   async crearRegistroDiario(){
@@ -60,6 +61,16 @@ export class DesahogarmePage implements OnInit {
     for(let item of this.diarios()){
       if(item.id==this.formatedString){
         (document.getElementById("areaTexto") as HTMLTextAreaElement)!.value=item.texto;
+      }
+    }
+  }
+
+  mostrarEmoji(){
+    for(let item of this.diarios()){
+      if(item.id==this.formatedString){
+        if(item.emocion!=''){
+          this.seleccionImagen(item.emocion)
+        }
       }
     }
   }
