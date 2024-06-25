@@ -94,7 +94,7 @@ export class DatabaseService {
   }
 
   async guardarTexto(texto: string){
-    const query = `UPDATE diario SET texto=${texto}`;
+    const query = `UPDATE diario SET texto=${texto} WHERE texto=''`;
     const result = await this.db.query(query);
 
     this.cargarDiario();
