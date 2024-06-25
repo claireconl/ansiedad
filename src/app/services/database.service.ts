@@ -77,7 +77,7 @@ export class DatabaseService {
     return this.contactos;
   }
 
-  async crearDiario(fecha: string, texto: any, emocion: any){
+  async crearDiario(fecha: string, texto: string, emocion: string){
     const query = `INSERT INTO diario VALUES ('${fecha}','${texto}','${emocion}')`;
     const result = await this.db.query(query);
 
@@ -85,8 +85,8 @@ export class DatabaseService {
     return result;
   }
 
-  async guardarEmocion(emocion: string){
-    const query = `UPDATE diario SET emocion=${emocion} WHERE id="2024-06-25"`;
+  async guardarEmocion(id: string, emocion: string){
+    const query = `UPDATE diario SET emocion=${emocion} WHERE id=${id}`;
     const result = await this.db.query(query);
 
     this.cargarDiario();
