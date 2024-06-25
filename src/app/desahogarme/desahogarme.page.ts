@@ -192,7 +192,7 @@ export class DesahogarmePage implements OnInit {
       }
       //existe emocion pero no texto
       else if(item.emocion!='' && item.texto==''){
-        seccionNueva = `<img width="60" height="60" src="`+item.emocion+`">`;
+        seccionNueva = `<img width="60" height="60" src="assets/imagenes/`+item.emocion+`.png">`;
       }
       //existe texto pero no emocion
       else if(item.emocion=='' && item.texto!=''){
@@ -200,7 +200,7 @@ export class DesahogarmePage implements OnInit {
       }
       //existen ambos registros
       else{
-        seccionNueva = `<img width="60" height="60" src="`+item.emocion+`">
+        seccionNueva = `<img width="60" height="60" src="assets/imagenes/`+item.emocion+`.png">
                         <p style="padding-left: 1em;">`+item.texto+`</p>`;
       }
     }
