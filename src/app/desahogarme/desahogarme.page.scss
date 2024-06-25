@@ -107,6 +107,11 @@ ion-label{
 }
 
 //CONTACTOS
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 ion-accordion{
     background-color: #FEFEEF;
     display: flex;
@@ -165,6 +170,25 @@ ion-accordion.accordion-expanded ion-item[slot="header"]{
     margin: 1em;
     --border-radius: .5em;
     --border-style: solid;
+}
+
+#div-contactos{
+    background-color: #FEFEEF;
+    border-radius: 1em;
+    margin: 0.5em 1.2em;
+}
+
+#lista-contactos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ion-padding{
+    background-color: #FEFEEF;
+    padding: .5em 0;
+    display:flex;
+    flex-direction:column;
 }
 
 //ANIMO

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { Form, FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonLabel, IonItem, IonDatetime, IonAccordionGroup, IonAccordion, IonTextarea, IonButton, IonInput} from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -11,7 +11,7 @@ import { Contacto, DatabaseService } from '../services/database.service';
   templateUrl: './desahogarme.page.html',
   styleUrls: ['./desahogarme.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonLabel, IonItem, IonDatetime, IonAccordionGroup, IonAccordion, IonTextarea, IonButton, IonInput, CommonModule, FormsModule, RouterLink],
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonLabel, IonItem, IonDatetime, IonAccordionGroup, IonAccordion, IonTextarea, IonButton, IonInput, CommonModule, FormsModule,ReactiveFormsModule, RouterLink],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class DesahogarmePage implements OnInit {
@@ -20,56 +20,114 @@ export class DesahogarmePage implements OnInit {
   public contador: number;
   public dateFormat!: string;
   emoticonoElegido='';
+  textoEscrito='';
   dateValue = new Date().toISOString();
   formatedString = '';
   contactos = this.database.getContactos();
-  nuevoNombreContacto = '';
-  nuevoTelfContacto = '';
-  borrarNombreContacto = '';
+  diarios = this.database.getDiario();
+  formContacto: FormGroup = {} as FormGroup;
 
-  constructor(private database: DatabaseService) {
+
+  constructor(private database: DatabaseService, private fb: FormBuilder) {
+
     this.today = Date.now();    
     this.contador = 0;
+    
    }
   ngOnInit() {
     setTimeout(() => {
       this.setToday();
     });
+    this.formContacto = this.fb.group({
+      nombre: ['', [Validators.required]],
+      numero: ['', [Validators.required]],
+    });
+    this.crearRegistroDiario();
+    this.mostrarTexto();
+    this.mostrarEmoji();
+  }
+
+  async crearRegistroDiario(){
+    this.formatedString = this.dateValue.split('T')[0];
+    await this.database.crearDiario(this.formatedString, this.textoEscrito, this.emoticonoElegido);
+  }
+
+  guardarTexto(){
+    this.textoEscrito = (document.getElementById("areaTexto") as HTMLTextAreaElement)!.value;
+    this.database.guardarTexto(this.formatedString,this.textoEscrito.toString());
+  }
+
+  mostrarTexto(){
+    for(let item of this.diarios()){
+      if(item.id==this.formatedString){
+        (document.getElementById("areaTexto") as HTMLTextAreaElement)!.value=item.texto;
+      }
+    }
+  }
+
+  mostrarEmoji(){
+    for(let item of this.diarios()){
+      if(item.id==this.formatedString){
+        if(item.emocion!=''){
+          this.seleccionImagen(item.emocion)
+        }
+      }
+    }
+  }
+
+  async crearContacto(){
+    await this.database.anyadirContacto(this.formContacto.value.nombre, this.formContacto.value.numero);
+    (document.getElementById('nombre')as HTMLInputElement)!.value = '';
+    (document.getElementById('numero')as HTMLInputElement)!.value = '';
+  }
+
+  borrarUsuario(contacto: Contacto){
+    this.database.borrarContacto(contacto.id.toString());
   }
 
   setToday(){
     this.formatedString = this.dateValue.split('T')[0]; 
   }
 
-  async crearContacto(){
-    await this.database.anadirContacto(this.nuevoTelfContacto, this.nuevoNombreContacto);
-    this.nuevoNombreContacto='';
-    this.nuevoTelfContacto='';
-  }
-
-  async borrarContacto(){
-    this.database.eliminarContacto(this.borrarNombreContacto);
-    this.borrarNombreContacto='';
-  }
 
   abrirEscribir(){
     let seccion = document.getElementById("escribir");
-    seccion!.style.display = 'block';
+    if(seccion!.style.display == 'block'){
+      seccion!.style.display='none';
+    }
+    else{
+      seccion!.style.display='block';
+    }
   }
 
   abrirAnimo(){
     let seccion = document.getElementById("animo");
-    seccion!.style.display = 'flex';
+    if(seccion!.style.display == 'flex'){
+      seccion!.style.display='none';
+    }
+    else{
+      seccion!.style.display='flex';
+    }
    }
 
   abrirContactos(){
    let seccion = document.getElementById("contact");
-   seccion!.style.display = 'block';
+   if(seccion!.style.display == 'block'){
+      seccion!.style.display='none';
+    }
+    else{
+      seccion!.style.display='block';
+    }
   }
 
   abrirCalendario(){
     let seccion = document.getElementById("calendario");
-    seccion!.style.display = 'block';
+    if(seccion!.style.display == 'block'){
+      seccion!.style.display='none';
+    }
+    else{
+      seccion!.style.display='block';
+    }
   }
 
   cerrarResto(nombre: string){
@@ -93,76 +151,6 @@ export class DesahogarmePage implements OnInit {
       document.getElementById("contact")!.style.display='none';
       document.getElementById("animo")!.style.display='none';
     }
-  }
-
-  eliminarContacto(nombre: string){
-    let acordeon = document.getElementById(nombre);
-    acordeon!.remove();
-    if(document.getElementById("lista-contactos")!.children.length==0){
-      document.getElementById("div-contactos")!.remove();
-      this.contador=0;
-    }
-    else{
-      this.contador--;
-    }
-    this.borrarNombreContacto=nombre;
-    this.borrarContacto();
-  }
-  anadirContacto(){
-    let seccion = document.getElementById('contact');
-    let nombre = (document.getElementById('nombre')as HTMLInputElement)!.value;
-    let nuevoContacto = '';
-    if(nombre !== ''){
-      if(document.getElementById('lista-contactos') == null){
-        nuevoContacto =`<div id="div-contactos"style="background-color: #FEFEEF;border-radius: 1em;border-color: #0A0048;margin: 0.5em 1.2em;border-style: solid;border-width: .16em;">
-                        <ion-accordion-group id="lista-contactos" style="display: flex;flex-direction: column; align-items: center;">
-                          <ion-accordion id="`+nombre+`" style="width: 90%; border-radius: 1em;">
-                            <ion-item slot="header" style="--background: #FEFEEF;">
-                              <ion-label>`+nombre+`</ion-label>
-                            </ion-item>
-                            <div class="ion-padding" slot="content" style="background-color: #FEFEEF; padding: .5em 0; display:flex;flex-direction:column;">
-                            <ion-item style="--background: #FEFEEF;">
-                              <ion-icon name="call-outline"></ion-icon>
-                              <ion-label style="margin-left: .5em">Llamar</ion-label>
-                            </ion-item>
-                            <ion-item style="--background: #FEFEEF; --inner-border-width:0">
-                              <ion-icon name="logo-whatsapp"></ion-icon>
-                              <ion-label style="margin-left: .5em">Abrir WhatsApp</ion-label>
-                            </ion-item>
-                            <ion-button class="btn-el" style="--background:#FF8585; --color:#0A0048;font-weight: 600;width: 40%;align-self: center;">Eliminar</ion-button>
-                            </div>
-                          </ion-accordion>
-                        </ion-accordion-group>
-                        </div>`;
-        seccion!.insertAdjacentHTML("afterbegin", nuevoContacto);
-        document.getElementsByClassName("btn-el")[0]!.addEventListener("click", () => { this.eliminarContacto(nombre) });
-        }
-        else{
-          seccion = document.getElementById('lista-contactos');
-          document.getElementById("div-contactos")!.style.display='block';
-          nuevoContacto = `<ion-accordion id="`+nombre+`" style="width: 90%; border-radius: 1em;">
-                            <ion-item slot="header" style="--background: #FEFEEF;">
-                              <ion-label>`+nombre+`</ion-label>
-                            </ion-item>
-                            <div class="ion-padding" slot="content" style="background-color: #FEFEEF; padding: .5em 0; display:flex;flex-direction:column;">
-                            <ion-item style="--background: #FEFEEF;">
-                              <ion-icon name="call-outline"></ion-icon>
-                              <ion-label style="margin-left: .5em">Llamar</ion-label>
-                            </ion-item>
-                            <ion-item style="--background: #FEFEEF; --inner-border-width:0">
-                              <ion-icon name="logo-whatsapp"></ion-icon>
-                              <ion-label style="margin-left: .5em">Abrir WhatsApp</ion-label>
-                            </ion-item>
-                            <ion-button class="btn-el" style="--background:#FF8585; --color: #0A0048;font-weight: 600;width: 40%;align-self: center;" (click)="eliminarContacto('`+nombre+`')">Eliminar</ion-button>
-                            </div>
-                          </ion-accordion>`;
-        seccion!.insertAdjacentHTML("beforeend", nuevoContacto);
-        this.contador++;
-        document.getElementsByClassName("btn-el")[this.contador]!.addEventListener("click", () => { this.eliminarContacto(nombre) });
-      }
-    }
-    (document.getElementById('nombre')as HTMLInputElement)!.value = '';
-    this.crearContacto();
   }
 
  //ANIMO
@@ -228,6 +216,7 @@ export class DesahogarmePage implements OnInit {
     else{
       this.emoticonoElegido='';
     }
+    this.database.guardarEmocion(this.formatedString, this.emoticonoElegido);
  }
 
  //DIARIO
@@ -235,27 +224,28 @@ export class DesahogarmePage implements OnInit {
   this.dateValue = value;
   this.formatedString = value.split('T')[0]; 
   let seccion = document.getElementById("nuevaSeccion");
-  let seccionNueva ='';
-  let texto = (document.getElementById("areaTexto") as HTMLTextAreaElement);
-  let imagen = document.getElementById(this.emoticonoElegido) as HTMLImageElement;
-  //CASOS
-    //no existe ningun registro
-    if(this.emoticonoElegido=='' && texto.value==''){
-      seccionNueva = `<p style="padding-left: 1em;">No hay registro para este día</p>`;
+  let seccionNueva =`<p style="padding-left: 1em;">No hay registro para este día</p>`;
+  let noRegistro = false;
+  for(let item of this.diarios()){
+    if(item.id==this.formatedString){
+      if(item.emocion=='' && item.texto==''){
+        seccionNueva = `<p style="padding-left: 1em;">No hay registro para este día</p>`;
+      }
+      //existe emocion pero no texto
+      else if(item.emocion!='' && item.texto==''){
+        seccionNueva = `<img width="60" height="60" src="assets/imagenes/`+item.emocion+`.png">`;
+      }
+      //existe texto pero no emocion
+      else if(item.emocion=='' && item.texto!=''){
+        seccionNueva = `<p style="padding-left: 1em;">`+item.texto+`</p>`;
+      }
+      //existen ambos registros
+      else{
+        seccionNueva = `<img width="60" height="60" src="assets/imagenes/`+item.emocion+`.png">
+                        <p style="padding-left: 1em;">`+item.texto+`</p>`;
+      }
     }
-    //existe emocion pero no texto
-    else if(this.emoticonoElegido!='' && texto.value==''){
-      seccionNueva = `<img width="60" height="60" src="`+imagen.src+`">`;
-    }
-    //existe texto pero no emocion
-    else if(this.emoticonoElegido=='' && texto.value!=''){
-      seccionNueva = `<p style="padding-left: 1em;">`+texto.value+`</p>`;
-    }
-    //existen ambos registros
-    else{
-      seccionNueva = `<img width="60" height="60" src="`+imagen.src+`">
-                      <p style="padding-left: 1em;">`+texto.value+`</p>`;
-    }
+  }  
     seccion!.innerHTML=seccionNueva
  }
 }
