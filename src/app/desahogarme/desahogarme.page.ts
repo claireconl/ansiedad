@@ -75,7 +75,7 @@ export class DesahogarmePage implements OnInit {
 
   mostrarTexto(){
     for(let item of this.diarios()){
-      if(item.id==this.fechaHoy){
+      if(item.id_fecha==this.fechaHoy){
         (document.getElementById("areaTexto") as HTMLTextAreaElement)!.value=item.texto;
       }
     }
@@ -83,7 +83,7 @@ export class DesahogarmePage implements OnInit {
 
   mostrarEmoji(){
     for(let item of this.diarios()){
-      if(item.id==this.fechaHoy){
+      if(item.id_fecha==this.fechaHoy){
         if(item.emocion!=''){
           this.seleccionImagen(item.emocion);
         }
@@ -245,7 +245,7 @@ export class DesahogarmePage implements OnInit {
   //por defecto no hay registro ni de emocion ni de texto
   let seccionNueva =`<p style="padding-left: 1em; margin-top:0;">No hay registro para este día</p>`;
   for(let item of this.diarios()){
-    if(item.id==this.fechaEscogida){
+    if(item.id_fecha==this.fechaEscogida){
       //no existe ni emocion ni texto
       if(item.emocion=='' && item.texto==''){
         seccionNueva = `<p style="padding-left: 1em; margin-top:0;">No hay registro para este día</p>`;

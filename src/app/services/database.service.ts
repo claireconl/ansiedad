@@ -10,7 +10,7 @@ export interface Contacto {
 }
 
 export interface Diario{
-  id: string;
+  id_fecha: string;
   texto: string;
   emocion: string;
 }
