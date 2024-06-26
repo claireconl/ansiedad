@@ -22,7 +22,8 @@ export class DesahogarmePage implements OnInit {
   emoticonoElegido='';
   textoEscrito='';
   dateValue = new Date().toISOString();
-  formatedString = '';
+  fechaHoy = '';
+  fechaEscogida='';
   contactos = this.database.getContactos();
   diarios = this.database.getDiario();
   formContacto: FormGroup = {} as FormGroup;
@@ -48,22 +49,22 @@ export class DesahogarmePage implements OnInit {
   }
 
   setToday(){
-    this.formatedString = this.dateValue.split('T')[0]; 
+    this.fechaHoy = this.dateValue.split('T')[0]; 
   }
 
   //Funciones Diario
   async crearRegistroDiario(){
-    await this.database.crearDiario(this.formatedString, this.textoEscrito, this.emoticonoElegido);
+    await this.database.crearDiario(this.fechaHoy, this.textoEscrito, this.emoticonoElegido);
   }
 
   guardarTexto(){
     this.textoEscrito = (document.getElementById("areaTexto") as HTMLTextAreaElement)!.value;
-    this.database.guardarTexto(this.formatedString,this.textoEscrito.toString());
+    this.database.guardarTexto(this.fechaHoy,this.textoEscrito.toString());
   }
 
   mostrarTexto(){
     for(let item of this.diarios()){
-      if(item.id==this.formatedString){
+      if(item.id==this.fechaHoy){
         (document.getElementById("areaTexto") as HTMLTextAreaElement)!.value=item.texto;
       }
     }
@@ -71,7 +72,7 @@ export class DesahogarmePage implements OnInit {
 
   mostrarEmoji(){
     for(let item of this.diarios()){
-      if(item.id==this.formatedString){
+      if(item.id==this.fechaHoy){
         if(item.emocion!=''){
           this.seleccionImagen(item.emocion)
         }
@@ -219,17 +220,17 @@ export class DesahogarmePage implements OnInit {
     else{
       this.emoticonoElegido='';
     }
-    this.database.guardarEmocion(this.formatedString, this.emoticonoElegido);
+    this.database.guardarEmocion(this.fechaHoy, this.emoticonoElegido);
  }
 
  //Funcion mostrar entrada de diario
  abrirDiario(value: any){
-  let fecha = value.split('T')[0]; 
+  this.fechaEscogida = value.split('T')[0];
   let seccion = document.getElementById("nuevaSeccion");
   //por defecto no hay registro ni de emocion ni de texto
   let seccionNueva =`<p style="padding-left: 1em; margin-top:0;">No hay registro para este día</p>`;
   for(let item of this.diarios()){
-    if(item.id==fecha){
+    if(item.id==this.fechaEscogida){
       //no existe ni emocion ni texto
       if(item.emocion=='' && item.texto==''){
         seccionNueva = `<p style="padding-left: 1em; margin-top:0;">No hay registro para este día</p>`;
