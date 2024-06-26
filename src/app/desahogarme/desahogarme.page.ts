@@ -40,7 +40,6 @@ export class DesahogarmePage implements OnInit {
       nombre: ['', [Validators.required]],
       numero: ['', [Validators.required]],
     });
-    
     this.fechaHoy = this.dateValue.split('T')[0];
     this.crearRegistroDiario();
     this.mostrarTexto();
@@ -232,7 +231,7 @@ export class DesahogarmePage implements OnInit {
       }
       //existe emocion pero no texto
       else if(item.emocion!='' && item.texto==''){
-        seccionNueva = `<img style="margin-top:0;padding-left:1em;" width="60" height="60" src="assets/imagenes/`+item.emocion+`.png">`;
+        seccionNueva = `<img style="margin-top:0;margin-left:1em;" width="60" height="60" src="assets/imagenes/`+item.emocion+`.png">`;
       }
       //existe texto pero no emocion
       else if(item.emocion=='' && item.texto!=''){
@@ -240,7 +239,7 @@ export class DesahogarmePage implements OnInit {
       }
       //existen ambos registros
       else{
-        seccionNueva = `<img style="margin-top:0;padding-left:1em;" width="60" height="60" src="assets/imagenes/`+item.emocion+`.png">
+        seccionNueva = `<img style="margin-top:0;margin-left:1em;" width="60" height="60" src="assets/imagenes/`+item.emocion+`.png">
                         <p style="padding-left: 1em;">`+item.texto+`</p>`;
       }
     }
