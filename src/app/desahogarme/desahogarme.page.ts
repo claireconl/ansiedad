@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Form, FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Form, FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonLabel, IonItem, IonDatetime, IonAccordionGroup, IonAccordion, IonTextarea, IonButton, IonInput} from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -27,6 +27,18 @@ export class DesahogarmePage implements OnInit {
   contactos = this.database.getContactos();
   diarios = this.database.getDiario();
   formContacto: FormGroup = {} as FormGroup;
+  isSubmited= false;
+  public mensajes_validacion ={
+    'nombre':[
+      {type: 'required', message: 'El nombre no puede quedar vacío' }
+    ],
+    'numero':[
+      {type: 'required', message: 'El número no puede quedar vacío'},
+      {type: 'minlength', message: 'El número debe tener 9 dígitos'},
+      {type: 'maxlength', message: 'El número debe tener 9 dígitos'},
+      {type: 'pattern', message: 'Introduce solo números en el campo número'}
+    ],
+  }
 
   //costructor que conecta con la BD y establece el formulario para rellenar un contacto
   constructor(private database: DatabaseService, private fb: FormBuilder) {
@@ -37,8 +49,13 @@ export class DesahogarmePage implements OnInit {
   //la tabla diario con la fecha de hoy, si hubiera un texto o emocion predefinida, se muestran
   ngOnInit() {
     this.formContacto = this.fb.group({
-      nombre: ['', [Validators.required]],
-      numero: ['', [Validators.required]],
+      nombre: new FormControl('', Validators.required),
+      numero: new FormControl('', {validators:[
+        Validators.minLength(9),
+        Validators.maxLength(9),
+        Validators.pattern(/^[0-9]\d*$/),
+        Validators.required
+      ]}),
     });
     this.fechaHoy = this.dateValue.split('T')[0];
     this.crearRegistroDiario();
@@ -76,13 +93,16 @@ export class DesahogarmePage implements OnInit {
 
   //Funciones Contactos
   async crearContacto(){
-    await this.database.anyadirContacto(this.formContacto.value.nombre, this.formContacto.value.numero);
-    (document.getElementById('nombre')as HTMLInputElement)!.value = '';
-    (document.getElementById('numero')as HTMLInputElement)!.value = '';
+    this.isSubmited=true;
+    if(this.formContacto.valid){
+      await this.database.anyadirContacto(this.formContacto.value.numero, this.formContacto.value.nombre);
+      (document.getElementById('nombre')as HTMLInputElement)!.value = '';
+      (document.getElementById('numero')as HTMLInputElement)!.value = '';
+    }
   }
 
-  borrarUsuario(contacto: Contacto){
-    this.database.borrarContacto(contacto.id.toString());
+  borrarContacto(numero: string){
+    this.database.borrarContacto(numero);
   }
 
   //Funciones abrir y cerrar secciones desahogarme

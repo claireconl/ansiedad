@@ -5,9 +5,8 @@ const DB_ANSIEDAD = 'myansiedaddb';
 
 //definicion de las interfaces para exportarlas y usarlas luego en la pagina desahogarme
 export interface Contacto {
-  id: number;
+  id_numero: string;
   nombre: string;
-  numero: string;
 }
 
 export interface Diario{
@@ -40,12 +39,11 @@ export class DatabaseService {
 
     //esquema que crea las tablas de la BD
     const schema = `CREATE TABLE IF NOT EXISTS contactos(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre TEXT NOT NULL,
-    numero TEXT NOT NULL);
+    id_numero TEXT PRIMARY KEY,
+    nombre TEXT NOT NULL);
     
     CREATE TABLE IF NOT EXISTS diario(
-    id TEXT PRIMARY KEY,
+    id_fecha TEXT PRIMARY KEY,
     texto TEXT,
     emocion TEXT);`;
 
@@ -56,8 +54,8 @@ export class DatabaseService {
   }
 
   //CRUD CONTACTOS
-  async anyadirContacto(nombre: string, numero:string){
-    const query = `INSERT INTO contactos (nombre, numero) VALUES ('${nombre}','${numero}')`;
+  async anyadirContacto(numero: string, nombre:string){
+    const query = `INSERT INTO contactos VALUES ('${numero}','${nombre}')`;
     const result = await this.db.query(query);
 
     this.cargarContactos();
@@ -65,7 +63,7 @@ export class DatabaseService {
   }
 
   async borrarContacto(id:string){
-    const query = `DELETE FROM contactos WHERE id=${id}`;
+    const query = `DELETE FROM contactos WHERE id_numero='${id}'`;
     const result = await this.db.query(query);
 
     this.cargarContactos();
@@ -90,7 +88,7 @@ export class DatabaseService {
   }
 
   async guardarEmocion(fecha: string, emocion: string){
-    const query = `UPDATE diario SET emocion='${emocion}' WHERE id='${fecha}'`;
+    const query = `UPDATE diario SET emocion='${emocion}' WHERE id_fecha='${fecha}'`;
     const result = await this.db.query(query);
 
     this.cargarDiario();
@@ -98,7 +96,7 @@ export class DatabaseService {
   }
 
   async guardarTexto(fecha: string, text: string,){
-    const query = `UPDATE diario SET texto='${text}' WHERE id='${fecha}'`;
+    const query = `UPDATE diario SET texto='${text}' WHERE id_fecha='${fecha}'`;
     const result = await this.db.query(query);
 
     this.cargarDiario();
