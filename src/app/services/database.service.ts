@@ -56,7 +56,7 @@ export class DatabaseService {
 
   //CRUD CONTACTOS
   async anyadirContacto(numero: string, nombre:string){
-    const query = `INSERT INTO contactos (numero, nombre) VALUES ('${numero}','${nombre}')`;
+    const query = `INSERT INTO contactos VALUES ('${numero}','${nombre}')`;
     const result = await this.db.query(query);
 
     this.cargarContactos();

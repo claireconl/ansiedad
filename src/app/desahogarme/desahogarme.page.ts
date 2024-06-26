@@ -99,9 +99,6 @@ export class DesahogarmePage implements OnInit {
       (document.getElementById('nombre')as HTMLInputElement)!.value = '';
       (document.getElementById('numero')as HTMLInputElement)!.value = '';
     }
-    else{
-      return;
-    }
   }
 
   borrarUsuario(contacto: Contacto){
