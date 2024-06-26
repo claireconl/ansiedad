@@ -50,13 +50,13 @@
               <div class="ion-padding" slot="content">
                 <ion-item style="--background: #FEFEEF; border-style: none;">
                   <ion-icon name="call-outline" style="color:#0A0048;"></ion-icon>
-                  <a aria-label="Llamar" style="margin-left: .5em; color: #0A0048; text-decoration: none; font-weight: 600;" href="tel:+34{{contacto.numero}}">Llamar</a>
+                  <a aria-label="Llamar" style="margin-left: .5em; color: #0A0048; text-decoration: none; font-weight: 600;" href="tel:+34{{contacto.id_numero}}">Llamar</a>
                 </ion-item>
                 <ion-item style="--background: #FEFEEF; --inner-border-width:0; border-style: none;">
                   <ion-icon name="logo-whatsapp" style="color:#0A0048;"></ion-icon>
-                  <a aria-label="Abrir WhatsApp" style="margin-left: .5em; color: #0A0048; text-decoration: none; font-weight: 600;" href="https://wa.me/34{{contacto.numero}}">Abrir WhatsApp</a>
+                  <a aria-label="Abrir WhatsApp" style="margin-left: .5em; color: #0A0048; text-decoration: none; font-weight: 600;" href="https://wa.me/34{{contacto.id_numero}}">Abrir WhatsApp</a>
                 </ion-item>
-                <ion-button (click)="borrarUsuario(contacto)" fill="clear" style="--background:#FF8585; --color:#0A0048;font-weight: 600;width: 40%;align-self: center; text-transform: none;">Eliminar</ion-button>
+                <ion-button (click)="borrarContacto(contacto.id_numero)" fill="clear" style="--background:#FF8585; --color:#0A0048;font-weight: 600;width: 40%;align-self: center; text-transform: none;">Eliminar</ion-button>
               </div>
             </ion-accordion>
           </ion-accordion-group>

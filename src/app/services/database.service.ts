@@ -5,9 +5,8 @@ const DB_ANSIEDAD = 'myansiedaddb';
 
 //definicion de las interfaces para exportarlas y usarlas luego en la pagina desahogarme
 export interface Contacto {
-  id: number;
+  id_numero: string;
   nombre: string;
-  numero: string;
 }
 
 export interface Diario{

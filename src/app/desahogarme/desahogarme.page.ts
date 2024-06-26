@@ -101,8 +101,8 @@ export class DesahogarmePage implements OnInit {
     }
   }
 
-  borrarUsuario(contacto: Contacto){
-    this.database.borrarContacto(contacto.numero);
+  borrarContacto(numero: string){
+    this.database.borrarContacto(numero);
   }
 
   //Funciones abrir y cerrar secciones desahogarme
