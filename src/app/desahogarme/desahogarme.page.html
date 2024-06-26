@@ -76,6 +76,16 @@
                       <ion-input type="tel" formControlName="numero" aria-label="Numero" placeholder="N&uacute;mero" name="numero" id="numero"></ion-input>
                     </ion-item>
                   </div>
+                  <small *ngFor="let validacion of mensajes_validacion.nombre">
+                    <div *ngIf="isSubmited && formContacto.get('nombre')!.hasError(validacion.type)">
+                      {{validacion.message}}
+                    </div>
+                  </small>
+                  <small *ngFor="let validacion of mensajes_validacion.numero">
+                    <div *ngIf="isSubmited && formContacto.get('numero')!.hasError(validacion.type)">
+                      {{validacion.message}}
+                    </div>
+                  </small>
                   <ion-button type="submit" class="boton-guardar" size="small">Guardar</ion-button>
                 </form>
             </div>
