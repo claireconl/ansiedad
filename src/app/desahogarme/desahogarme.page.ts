@@ -36,20 +36,15 @@ export class DesahogarmePage implements OnInit {
   //al iniciar la App se define la fecha de hoy, el formulario para rellenar un contacto, se crea un registro en
   //la tabla diario con la fecha de hoy, si hubiera un texto o emocion predefinida, se muestran
   ngOnInit() {
-    setTimeout(() => {
-      this.setToday();
-    });
     this.formContacto = this.fb.group({
       nombre: ['', [Validators.required]],
       numero: ['', [Validators.required]],
     });
+    
+    this.fechaHoy = this.dateValue.split('T')[0];
     this.crearRegistroDiario();
     this.mostrarTexto();
     this.mostrarEmoji();
-  }
-
-  setToday(){
-    this.fechaHoy = this.dateValue.split('T')[0]; 
   }
 
   //Funciones Diario
