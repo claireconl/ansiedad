@@ -18,6 +18,7 @@ import { App } from '@capacitor/app';
 })
 export class IndexPage implements OnInit {
 
+  //funcion para salir de la App cuando se da al boton de atras desde la pantalla de inicio
   constructor(
     private platform: Platform,
     @Optional() private routerOutlet?: IonRouterOutlet

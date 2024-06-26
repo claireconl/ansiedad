@@ -9,6 +9,7 @@
 </ion-header>
 <ion-content [fullscreen]="true">
   <div id="contenido">
+    <!--Seccion diario-calendario-->
     <div id="iconos-calendario">
       <ion-button id="boton-calendario" (click)="cerrarResto('calendario'); abrirCalendario()">
         <ion-icon name="calendar-outline" aria-setsize="large" class="calendario"></ion-icon>
@@ -19,6 +20,7 @@
         <ion-datetime [value]="dateValue" (ionChange)="abrirDiario(datetime.value)" #datetime presentation="date" [firstDayOfWeek]="1" ></ion-datetime>
         <div id="nuevaSeccion"></div>
     </div>  
+    <!--Seccion escribir-->
     <div>
       <div class="cabecera">
         <ion-button (click)="abrirEscribir(); cerrarResto('escribir')" class="mas">
@@ -30,6 +32,7 @@
         <ion-textarea id="areaTexto" rows="8" placeholder="¿Qu&eacute; te preocupa?" (ionChange)="guardarTexto()"></ion-textarea>
       </div>
     </div>
+    <!--Seccion hablar con alguien-->
    <div>
       <div class="cabecera">
         <ion-button (click)="abrirContactos(); cerrarResto('contact')" class="mas">
@@ -80,6 +83,7 @@
         </ion-accordion-group>
       </div>     
     </div>
+    <!--Seccion registro de emociones-->
     <div>
       <div class="cabecera">
         <ion-button (click)="abrirAnimo(); cerrarResto('animo')" class="mas">

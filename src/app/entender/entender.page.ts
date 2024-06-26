@@ -15,6 +15,7 @@ import { RouterLink } from '@angular/router';
 })
 export class EntenderPage implements OnInit {
   
+  //funcion swiper para hacer las tarjetas con diapositivas
   swiperSlideChanged(e: any){
   }
 

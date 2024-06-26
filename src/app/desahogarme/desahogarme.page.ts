@@ -15,9 +15,9 @@ import { Contacto, DatabaseService } from '../services/database.service';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class DesahogarmePage implements OnInit {
+  //Variables usadas
   public today: number;
   public dateTime!: string;
-  public contador: number;
   public dateFormat!: string;
   emoticonoElegido='';
   textoEscrito='';
@@ -27,13 +27,13 @@ export class DesahogarmePage implements OnInit {
   diarios = this.database.getDiario();
   formContacto: FormGroup = {} as FormGroup;
 
-
+  //costructor que conecta con la BD y establece el formulario para rellenar un contacto
   constructor(private database: DatabaseService, private fb: FormBuilder) {
-
     this.today = Date.now();    
-    this.contador = 0;
-    
    }
+
+  //al iniciar la App se define la fecha de hoy, el formulario para rellenar un contacto, se crea un registro en
+  //la tabla diario con la fecha de hoy, si hubiera un texto o emocion predefinida, se muestran
   ngOnInit() {
     setTimeout(() => {
       this.setToday();
@@ -47,8 +47,12 @@ export class DesahogarmePage implements OnInit {
     this.mostrarEmoji();
   }
 
+  setToday(){
+    this.formatedString = this.dateValue.split('T')[0]; 
+  }
+
+  //Funciones Diario
   async crearRegistroDiario(){
-    this.formatedString = this.dateValue.split('T')[0];
     await this.database.crearDiario(this.formatedString, this.textoEscrito, this.emoticonoElegido);
   }
 
@@ -75,6 +79,7 @@ export class DesahogarmePage implements OnInit {
     }
   }
 
+  //Funciones Contactos
   async crearContacto(){
     await this.database.anyadirContacto(this.formContacto.value.nombre, this.formContacto.value.numero);
     (document.getElementById('nombre')as HTMLInputElement)!.value = '';
@@ -85,11 +90,7 @@ export class DesahogarmePage implements OnInit {
     this.database.borrarContacto(contacto.id.toString());
   }
 
-  setToday(){
-    this.formatedString = this.dateValue.split('T')[0]; 
-  }
-
-
+  //Funciones abrir y cerrar secciones desahogarme
   abrirEscribir(){
     let seccion = document.getElementById("escribir");
     if(seccion!.style.display == 'block'){
@@ -153,8 +154,9 @@ export class DesahogarmePage implements OnInit {
     }
   }
 
- //ANIMO
+ //Funciones Registro de Animo
 
+ //funcion que pone los emoticonos no escogidos en escala de grises
  seleccionImagen(id:string){
   if(id=="muytriste"){
     document.getElementById("muytriste")!.style.filter="grayscale(0%)";
@@ -197,6 +199,7 @@ export class DesahogarmePage implements OnInit {
   }
  }
 
+//se guarda el emoticono que tenga todo el colorido y se llama a la funcion update de la BD
  guardarEmoji(){
     if(document.getElementById("muytriste")!.style.filter=="grayscale(0%)"){
       this.emoticonoElegido="muytriste";
@@ -219,29 +222,29 @@ export class DesahogarmePage implements OnInit {
     this.database.guardarEmocion(this.formatedString, this.emoticonoElegido);
  }
 
- //DIARIO
+ //Funcion mostrar entrada de diario
  abrirDiario(value: any){
-  this.dateValue = value;
-  this.formatedString = value.split('T')[0]; 
+  let fecha = value.split('T')[0]; 
   let seccion = document.getElementById("nuevaSeccion");
-  let seccionNueva =`<p style="padding-left: 1em;">No hay registro para este día</p>`;
-  let noRegistro = false;
+  //por defecto no hay registro ni de emocion ni de texto
+  let seccionNueva =`<p style="padding-left: 1em; margin-top:0;">No hay registro para este día</p>`;
   for(let item of this.diarios()){
-    if(item.id==this.formatedString){
+    if(item.id==fecha){
+      //no existe ni emocion ni texto
       if(item.emocion=='' && item.texto==''){
-        seccionNueva = `<p style="padding-left: 1em;">No hay registro para este día</p>`;
+        seccionNueva = `<p style="padding-left: 1em; margin-top:0;">No hay registro para este día</p>`;
       }
       //existe emocion pero no texto
       else if(item.emocion!='' && item.texto==''){
-        seccionNueva = `<img width="60" height="60" src="assets/imagenes/`+item.emocion+`.png">`;
+        seccionNueva = `<img style="margin-top:0;padding-left:1em;" width="60" height="60" src="assets/imagenes/`+item.emocion+`.png">`;
       }
       //existe texto pero no emocion
       else if(item.emocion=='' && item.texto!=''){
-        seccionNueva = `<p style="padding-left: 1em;">`+item.texto+`</p>`;
+        seccionNueva = `<p style="padding-left: 1em;  margin-top:0;">`+item.texto+`</p>`;
       }
       //existen ambos registros
       else{
-        seccionNueva = `<img width="60" height="60" src="assets/imagenes/`+item.emocion+`.png">
+        seccionNueva = `<img style="margin-top:0;padding-left:1em;" width="60" height="60" src="assets/imagenes/`+item.emocion+`.png">
                         <p style="padding-left: 1em;">`+item.texto+`</p>`;
       }
     }

@@ -17,7 +17,8 @@ import { RouterLink } from '@angular/router';
 export class CentrarPage implements OnInit {
 
   constructor() { }
-
+  
+  //funcion swiper para hacer las tarjetas con diapositivas
   swiperSlideChanged(e: any){
   }
   ngOnInit() {

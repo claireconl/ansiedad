@@ -3,6 +3,7 @@ import { CapacitorSQLite, SQLiteConnection, SQLiteDBConnection } from '@capacito
 
 const DB_ANSIEDAD = 'myansiedaddb';
 
+//definicion de las interfaces para exportarlas y usarlas luego en la pagina desahogarme
 export interface Contacto {
   id: number;
   nombre: string;
@@ -25,6 +26,7 @@ export class DatabaseService {
 
   constructor() { }
 
+  //funcion para iniciar la conexion a la BD
   async initializPlugin(){
     this.db = await this.sqlite.createConnection(
       DB_ANSIEDAD,
@@ -36,6 +38,7 @@ export class DatabaseService {
 
     await this.db.open();
 
+    //esquema que crea las tablas de la BD
     const schema = `CREATE TABLE IF NOT EXISTS contactos(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre TEXT NOT NULL,
@@ -52,7 +55,7 @@ export class DatabaseService {
     return true;
   }
 
-  //CRUD
+  //CRUD CONTACTOS
   async anyadirContacto(nombre: string, numero:string){
     const query = `INSERT INTO contactos (nombre, numero) VALUES ('${nombre}','${numero}')`;
     const result = await this.db.query(query);
@@ -77,6 +80,7 @@ export class DatabaseService {
     return this.contactos;
   }
 
+  //CRUD DIARIO
   async crearDiario(fecha: string, texto: string, emocion: string){
     const query = `INSERT INTO diario VALUES ('${fecha}','${texto}','${emocion}')`;
     const result = await this.db.query(query);
