@@ -4,7 +4,7 @@ import { Form, FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsMod
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonLabel, IonItem, IonDatetime, IonAccordionGroup, IonAccordion, IonTextarea, IonButton, IonInput} from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { Contacto, DatabaseService } from '../services/database.service';
+import { DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'app-desahogarme',
@@ -37,7 +37,7 @@ export class DesahogarmePage implements OnInit {
       {type: 'minlength', message: 'El número debe tener 9 dígitos'},
       {type: 'maxlength', message: 'El número debe tener 9 dígitos'},
       {type: 'pattern', message: 'Introduce solo números en el campo número'}
-    ],
+    ]
   }
 
   //costructor que conecta con la BD y establece el formulario para rellenar un contacto
@@ -55,7 +55,7 @@ export class DesahogarmePage implements OnInit {
         Validators.maxLength(9),
         Validators.pattern(/^[0-9]\d*$/),
         Validators.required
-      ]}),
+      ]})
     });
     this.fechaHoy = this.dateValue.split('T')[0];
     this.crearRegistroDiario();
@@ -70,7 +70,7 @@ export class DesahogarmePage implements OnInit {
 
   guardarTexto(){
     this.textoEscrito = (document.getElementById("areaTexto") as HTMLTextAreaElement)!.value;
-    this.database.guardarTexto(this.fechaHoy,this.textoEscrito.toString());
+    this.database.guardarTexto(this.fechaHoy,this.textoEscrito);
   }
 
   mostrarTexto(){
@@ -85,7 +85,7 @@ export class DesahogarmePage implements OnInit {
     for(let item of this.diarios()){
       if(item.id==this.fechaHoy){
         if(item.emocion!=''){
-          this.seleccionImagen(item.emocion)
+          this.seleccionImagen(item.emocion);
         }
       }
     }
@@ -240,6 +240,7 @@ export class DesahogarmePage implements OnInit {
  //Funcion mostrar entrada de diario
  abrirDiario(value: any){
   this.fechaEscogida = value.split('T')[0];
+  console.log("fecha escogida: "+this.fechaEscogida);
   let seccion = document.getElementById("nuevaSeccion");
   //por defecto no hay registro ni de emocion ni de texto
   let seccionNueva =`<p style="padding-left: 1em; margin-top:0;">No hay registro para este día</p>`;
@@ -255,7 +256,7 @@ export class DesahogarmePage implements OnInit {
       }
       //existe texto pero no emocion
       else if(item.emocion=='' && item.texto!=''){
-        seccionNueva = `<p style="padding-left: 1em;  margin-top:0;">`+item.texto+`</p>`;
+        seccionNueva = `<p style="padding-left: 1em; margin-top:0;">`+item.texto+`</p>`;
       }
       //existen ambos registros
       else{
