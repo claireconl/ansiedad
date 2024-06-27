@@ -1,0 +1,239 @@
+//COMUN
+ion-header {
+	--ion-toolbar-background: #C8FFF2;
+}
+
+.header-ios ion-toolbar:last-of-type {
+    --border-width: 0;
+}
+
+ion-accordion-group{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+ion-accordion{
+    margin: 1em 0;
+    width: 90%;
+}
+
+#contenido{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 90%;
+}
+
+//DIARIO-CALENDARIO
+ion-datetime{
+    --background:#FEFEEF;
+}
+.calendario{
+ font-size: 2em;
+}
+
+#boton-calendario{
+    font-size: 0.8em;
+    --background: #C8FFF2;
+    --color: #0A0048;
+    --background-activated:  #FEFEEF;
+    font-weight: 600;
+}
+
+ion-label{
+    font-size:1.5em;
+    margin: 0 .25em;
+}
+
+#iconos-calendario{
+    display: flex;
+    justify-content: center;
+}
+
+#calendario{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+    border-style: solid;
+    border-color: #0A0048;
+    border-width: 0.15em;
+    background-color: #FEFEEF;
+}
+
+//ESCRIBIR
+#escribir{
+    display: flex;
+    justify-content: center;
+}
+
+ion-textarea{
+    background-color: #FEFEEF;
+    width: 90%;
+    border-style: solid;
+    border-width: 0.15em;
+    border-color: #0A0048;
+    border-radius:1em;
+    --padding-start: .5em;
+    --padding-end: .1em;
+    text-align: justify;
+    margin: 1em .5em;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size:1.2em;
+
+
+}
+
+ion-card{
+    background-color: #FEFEEF;
+    width: 90%;
+    border-style: solid;
+    border-width: 0.15em;
+    border-color: #0A0048;
+    border-radius:1em;
+    color:#0A0048;
+    display: flex;
+    flex-direction: column;
+}
+
+ion-label{
+    text-align: center;
+    margin: .5em;
+    font-size: 1.6em;
+    font-weight: 600;
+}
+
+//CONTACTOS
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+ion-accordion{
+    background-color: #FEFEEF;
+    display: flex;
+    flex-direction: column;
+}
+
+#content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top-style: solid;
+    border-width: .15em;
+    border-color: #0A0048;
+}
+
+.contacto{
+    display: flex;
+}
+
+div>ion-item{
+    margin: 0 .2em;
+    border-radius: .5em;
+    border-style: solid;
+    border-width: 0.2em;
+}
+
+#anadir{
+    width:90%;
+    border-style: solid;
+    border-width: 0.15em;
+    border-color: #0A0048;
+    border-radius:1em;
+    color:#0A0048;
+}
+
+ion-accordion.accordion-collapsed ion-item[slot="header"],
+ion-accordion.accordion-collapsing ion-item[slot="header"],
+ion-accordion.accordion-expanding ion-item[slot="header"],
+ion-accordion.accordion-expanded ion-item[slot="header"]{
+    --background:#FEFEEF;
+    --color: #0A0048;
+}
+
+#cabecera-contacto{
+    font-size: 1.3em;
+}
+
+.boton-guardar{
+    --background: #FFDD67;
+    --background-activated: #FEFEEF;
+    --color: #0A0048;
+    width: 40%;
+    font-size: 1.3em;
+    font-weight: 600;
+    text-transform: none;
+    margin: 1em;
+    --border-radius: .5em;
+    --border-style: solid;
+}
+
+#div-contactos{
+    background-color: #FEFEEF;
+    border-radius: 1em;
+    margin: 0.5em 1.2em;
+}
+
+#lista-contactos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ion-padding{
+    background-color: #FEFEEF;
+    padding: .5em 0;
+    display:flex;
+    flex-direction:column;
+}
+
+//ANIMO
+
+#animo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #FEFEEF;
+    width:90%;
+    border-style: solid;
+    border-width: 0.15em;
+    border-color: #0A0048;
+    border-radius:1em;
+    color:#0A0048;
+    margin: auto;
+    margin-top: 1em;
+}
+
+h1{
+    font-size: 1.4em;
+    font-weight: 600;
+    text-align: center;
+    margin: 1em 0;
+}
+#emojis{
+    display: flex;
+    flex-direction: row;
+    margin: 1em 0.5em;
+}
+
+//BOTONES
+.mas{
+    font-size: 2em;
+    --border-radius: 3em;
+    --border-style: solid;
+    --border-color: #0A0048;
+    --border-width: 0.1em;
+    --background: #FEFEEF;
+    --color: #0A0048;
+    --background-activated: #FFDD67;
+    margin-left: .5em;
+}
+
+.cabecera{
+    display: flex;
+    align-items: center;
+}

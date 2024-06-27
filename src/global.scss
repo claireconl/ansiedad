@@ -34,4 +34,31 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+/*@import '@ionic/angular/css/palettes/dark.system.css';*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+	--ion-background-color: #C8FFF2;
+    --ion-text-color: #0A0048;
+    --ion-font-family: "Poppins", sans-serif;
+    font-style: regular;
+    font-weight: 600;
+}
+
+.atras{
+    font-size: 1.8em;
+    color: var(--ion-text-color, #0A0048);
+}
+
+ion-title{
+    font-size: 1.8em;
+    padding: 0;
+    font-weight: 700;
+    text-align: center;
+}
+ion-header {
+	--ion-toolbar-background: #C8FFF2;
+    display: contents;
+}
+
